@@ -1,0 +1,2 @@
+# SmartnoteAI
+SmartNorteAI用のレポジトリ
