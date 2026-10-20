@@ -1,0 +1,210 @@
+:root {
+  font-family: "Segoe UI", "Yu Gothic UI", sans-serif;
+  color: #203144;
+  background: #f4f6fa;
+  color-scheme: light;
+  --surface: #fff;
+  --border: #d6dfea;
+  --accent: #306ca9;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+body.dark {
+  color: #e5eaf1;
+  background: #18212e;
+  color-scheme: dark;
+  --surface: #222e3e;
+  --border: #43546a;
+  --accent: #7bb4ec;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+  background: var(--surface);
+  color: inherit;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 7px 11px;
+}
+button:hover,
+button.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+input,
+select {
+  background: var(--surface);
+  color: inherit;
+  border: 1px solid var(--border);
+  padding: 8px;
+}
+#app {
+  display: flex;
+  height: 100vh;
+}
+nav {
+  width: 160px;
+  flex-shrink: 0;
+  padding: 22px 12px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+nav small {
+  margin-bottom: 22px;
+}
+main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+h1 {
+  font-size: 22px;
+}
+#status {
+  font-size: 12px;
+}
+section {
+  flex: 1;
+  overflow: auto;
+}
+section[hidden],
+div[hidden] {
+  display: none !important;
+}
+#notes {
+  display: flex;
+  gap: 12px;
+  min-height: 0;
+}
+#note-list {
+  width: 160px;
+  overflow: auto;
+  flex-shrink: 0;
+}
+#note-list button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 5px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+article {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+}
+#tabs {
+  display: flex;
+  overflow-x: auto;
+  min-height: 38px;
+  gap: 4px;
+}
+#tabs button {
+  white-space: nowrap;
+}
+#title {
+  font-size: 20px;
+  margin: 8px 0;
+  width: 100%;
+}
+#toolbar {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+#hint {
+  font-size: 12px;
+  color: var(--accent);
+  margin: 8px 0;
+}
+#rich,
+#text {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  flex: 1;
+  min-height: 180px;
+  overflow: auto;
+}
+#rich .tiptap {
+  padding: 24px;
+  min-height: 100%;
+  outline: none;
+}
+#rich img {
+  max-width: 100%;
+  max-height: 500px;
+}
+#rich ul[data-type="taskList"] {
+  list-style: none;
+  padding: 0;
+}
+#rich li[data-type="taskItem"] {
+  display: flex;
+  gap: 10px;
+}
+#rich li[data-type="taskItem"] > div {
+  flex: 1;
+}
+#rich li p {
+  margin: 5px 0;
+}
+pre {
+  background: #152336;
+  color: #e4edff;
+  padding: 12px;
+}
+#error {
+  color: #c94444;
+  white-space: pre-wrap;
+  font-size: 13px;
+  max-height: 100px;
+  overflow: auto;
+}
+.card {
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 12px 0;
+}
+.task {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+#settings label {
+  display: block;
+  margin: 20px 0;
+}
+#home button {
+  margin: 5px;
+}
+small {
+  opacity: 0.75;
+}

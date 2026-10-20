@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+**/node_modules/
+editor-web/dist/
+artifacts/*
+!artifacts/.gitkeep
+**/TestResults/
+editor-web/test-results/
+editor-web/playwright-report/

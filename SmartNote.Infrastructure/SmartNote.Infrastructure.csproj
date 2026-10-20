@@ -1,0 +1,1 @@
+<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup></PropertyGroup><ItemGroup><ProjectReference Include="../SmartNote.Core/SmartNote.Core.csproj" /><ProjectReference Include="../SmartNote.Application/SmartNote.Application.csproj" /><PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.13" /></ItemGroup></Project>
