@@ -1,0 +1,5 @@
+Test run for /workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+Results File: /workspace/SmartnoteAI/SmartNote.Tests/TestResults/shortcut.trx
+
+Passed!  - Failed:     0, Passed:    39, Skipped:     0, Total:    39, Duration: 987 ms - SmartNote.Tests.dll (net10.0)

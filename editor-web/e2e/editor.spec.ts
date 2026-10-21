@@ -65,7 +65,9 @@ async function boot(page: Page, unknown = false) {
         tabs: initial.map((n) => ({ id: n.id, mode: "note" })),
         active: initial[0].id,
       };
-      let preferences = {
+      let preferences = JSON.parse(
+        localStorage.getItem("test-preferences") || "null",
+      ) || {
         topmost: false,
         quickTopmost: true,
         autoStart: false,
@@ -129,7 +131,15 @@ async function boot(page: Page, unknown = false) {
                 localStorage.setItem("test-notes", JSON.stringify(notes));
                 break;
               case "preferences":
+                if (w.__test.failPreferences)
+                  throw Error(
+                    "登録できません。元のショートカットは変更していません。",
+                  );
                 preferences = m.data;
+                localStorage.setItem(
+                  "test-preferences",
+                  JSON.stringify(preferences),
+                );
                 data = preferences;
                 break;
               default:
@@ -345,5 +355,93 @@ test("external quick-memo update refreshes the active clean editor before furthe
   await expect(page.locator("#status")).toHaveText("保存しました");
   expect(JSON.stringify((await value(page)).document)).toContain(
     "外部ウィンドウから更新 続き",
+  );
+});
+
+test("quick shortcut can be changed, restored on reload, disabled and reset", async ({
+  page,
+}) => {
+  await boot(page);
+  await page.locator("[data-page=settings]").click();
+  const settings = page.locator("#quick-shortcut-settings");
+  await expect(page.locator("#quick-shortcut-current")).toHaveText(
+    "現在の設定: Ctrl+Alt+M",
+  );
+  await settings.getByLabel("Alt", { exact: true }).uncheck();
+  await settings.getByLabel("Shift", { exact: true }).check();
+  await settings
+    .getByLabel("クイックメモのキー", { exact: true })
+    .selectOption("Q");
+  await settings
+    .getByRole("button", { name: "ショートカットを保存", exact: true })
+    .click();
+  await expect(page.locator("#quick-shortcut-current")).toHaveText(
+    "現在の設定: Ctrl+Shift+Q",
+  );
+  await page.reload();
+  await expect(page.locator("#status")).toHaveText("保存済み");
+  await page.locator("[data-page=settings]").click();
+  await expect(page.locator("#quick-shortcut-current")).toHaveText(
+    "現在の設定: Ctrl+Shift+Q",
+  );
+  await settings
+    .getByLabel("ショートカットを使用する", { exact: true })
+    .uncheck();
+  await settings
+    .getByRole("button", { name: "ショートカットを保存", exact: true })
+    .click();
+  await expect(page.locator("#quick-shortcut-current")).toHaveText(
+    "現在の設定: 無効",
+  );
+  await settings
+    .getByRole("button", { name: "初期値に戻す", exact: true })
+    .click();
+  await settings
+    .getByRole("button", { name: "ショートカットを保存", exact: true })
+    .click();
+  await expect(page.locator("#quick-shortcut-current")).toHaveText(
+    "現在の設定: Ctrl+Alt+M",
+  );
+});
+test("shortcut registration failure retains saved setting and lets the user retry", async ({
+  page,
+}) => {
+  await boot(page);
+  await page.locator("[data-page=settings]").click();
+  const settings = page.locator("#quick-shortcut-settings");
+  await settings
+    .getByLabel("クイックメモのキー", { exact: true })
+    .selectOption("Q");
+  await page.evaluate(() => {
+    (window as any).__test.failPreferences = true;
+  });
+  await settings
+    .getByRole("button", { name: "ショートカットを保存", exact: true })
+    .click();
+  await expect(page.locator("#quick-shortcut-feedback")).toContainText(
+    "元のショートカットは変更していません",
+  );
+  await expect(page.locator("#quick-shortcut-current")).toHaveText(
+    "現在の設定: Ctrl+Alt+M",
+  );
+  await page.evaluate(() => {
+    (window as any).__test.failPreferences = false;
+  });
+  await settings
+    .getByRole("button", { name: "ショートカットを保存", exact: true })
+    .click();
+  await expect(page.locator("#quick-shortcut-current")).toHaveText(
+    "現在の設定: Ctrl+Alt+Q",
+  );
+  await settings.getByLabel("Ctrl", { exact: true }).uncheck();
+  await settings.getByLabel("Alt", { exact: true }).uncheck();
+  await settings
+    .getByRole("button", { name: "ショートカットを保存", exact: true })
+    .click();
+  await expect(page.locator("#quick-shortcut-feedback")).toContainText(
+    "CtrlまたはAlt",
+  );
+  await expect(page.locator("#quick-shortcut-current")).toHaveText(
+    "現在の設定: Ctrl+Alt+Q",
   );
 });

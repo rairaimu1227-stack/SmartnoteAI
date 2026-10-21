@@ -1,3 +1,4 @@
+import { shortcutSettings } from "./shortcut-settings";
 import { Editor, Extension } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import TaskList from "@tiptap/extension-task-list";
@@ -35,6 +36,7 @@ type Task = {
 type Prefs = {
   topmost: boolean;
   quickTopmost: boolean;
+  quickShortcut?: string;
   autoStart: boolean;
   theme: string;
 };
@@ -486,6 +488,15 @@ function theme() {
 function renderSettings() {
   const el = $("settings");
   el.replaceChildren();
+  el.append(
+    shortcutSettings(prefs.quickShortcut ?? "Ctrl+Alt+M", async (value) => {
+      prefs = await request<Prefs>("preferences", {
+        ...prefs,
+        quickShortcut: value,
+      });
+      status("ショートカットを保存しました");
+    }),
+  );
   for (const [key, label] of [
     ["topmost", "メイン画面を最前面に表示"],
     ["quickTopmost", "クイックメモを最前面に表示"],

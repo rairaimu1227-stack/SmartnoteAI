@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6ba95f68-581a-4243-a7e1-788d4d5bd526" name="@eaa0edc636d1 2026-10-21 13:15:41" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-21T13:15:41.7216389+00:00" queuing="2026-10-21T13:15:41.7216390+00:00" start="2026-10-21T13:15:40.8708531+00:00" finish="2026-10-21T13:15:42.5699672+00:00" />
+  <TestSettings name="default" id="a587ca2d-5d41-4a2b-9836-eb2a65f04123">
+    <Deployment runDeploymentRoot="_eaa0edc636d1_2026-10-21_13_15_41" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="8d900e79-8aea-4c23-9011-8f5047fe08fb" testId="36fa0ae6-2541-530c-2bb2-b2b38559caf5" testName="SmartNote.Tests.PersistenceTests.AttachmentFailureDoesNotRegisterAReference" computerName="eaa0edc636d1" duration="00:00:00.0022750" startTime="2026-10-21T13:15:41.8283887+00:00" endTime="2026-10-21T13:15:41.8294295+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8d900e79-8aea-4c23-9011-8f5047fe08fb" />
+    <UnitTestResult executionId="e7318105-7b8c-4986-8da4-6f368b0eab8e" testId="563a158c-60ee-8e43-1d2c-5fcbed68055a" testName="SmartNote.Tests.PersistenceTests.POC008_ImageReferenceAndBytesSurviveSaveReopen" computerName="eaa0edc636d1" duration="00:00:00.0066789" startTime="2026-10-21T13:15:41.7629675+00:00" endTime="2026-10-21T13:15:41.7702966+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e7318105-7b8c-4986-8da4-6f368b0eab8e" />
+    <UnitTestResult executionId="fd612f9a-c2e7-422f-9c0b-2ebad907faf7" testId="284623d2-50f3-7ea8-8b36-dc4353584077" testName="SmartNote.Tests.PersistenceTests.InvalidDuplicateBlockIdsAreRejectedBeforeWrite" computerName="eaa0edc636d1" duration="00:00:00.0035195" startTime="2026-10-21T13:15:41.8401487+00:00" endTime="2026-10-21T13:15:41.8441981+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fd612f9a-c2e7-422f-9c0b-2ebad907faf7" />
+    <UnitTestResult executionId="ad556ce1-ff80-481b-b8c7-084752f2c857" testId="3562b8b7-1a88-b866-2359-b4b8a19cad0b" testName="SmartNote.Tests.ShortcutTests.RegistrationConflictDoesNotSaveOrUnregisterOld" computerName="eaa0edc636d1" duration="00:00:00.0040194" startTime="2026-10-21T13:15:41.6510877+00:00" endTime="2026-10-21T13:15:41.6511891+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ad556ce1-ff80-481b-b8c7-084752f2c857" />
+    <UnitTestResult executionId="e476c017-ccf9-4607-9e1e-178cd61b80c0" testId="b230d3f8-a1e9-0019-af5b-ef0d0617b33b" testName="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Win+M&quot;)" computerName="eaa0edc636d1" duration="00:00:00.0000039" startTime="2026-10-21T13:15:41.6144355+00:00" endTime="2026-10-21T13:15:41.6145459+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e476c017-ccf9-4607-9e1e-178cd61b80c0" />
+    <UnitTestResult executionId="d5288a4f-34bd-4d38-a2ba-ea79e4402632" testId="94e056e1-b362-4890-7b1c-b95bbae930b5" testName="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Shift+M&quot;)" computerName="eaa0edc636d1" duration="00:00:00.0016360" startTime="2026-10-21T13:15:41.5662296+00:00" endTime="2026-10-21T13:15:41.5673578+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d5288a4f-34bd-4d38-a2ba-ea79e4402632" />
+    <UnitTestResult executionId="4ecc9237-18e8-4a16-ad5a-2594426a07f5" testId="b28239b8-2dc5-72b6-9fff-fcd9bd60bbe8" testName="SmartNote.Tests.ShortcutTests.DisableIsTransactionalAndSameKeyDoesNotReregister" computerName="eaa0edc636d1" duration="00:00:00.0026829" startTime="2026-10-21T13:15:41.6453173+00:00" endTime="2026-10-21T13:15:41.6453842+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4ecc9237-18e8-4a16-ad5a-2594426a07f5" />
+    <UnitTestResult executionId="e9dfadad-01c3-4686-bd37-d9d58e435d37" testId="b895c9b3-96f2-ff32-0af2-e3150399ddc4" testName="SmartNote.Tests.ShortcutTests.ParsesSupportedKeys(text: &quot;Shift+Ctrl+Q&quot;, modifiers: 6, key: 81)" computerName="eaa0edc636d1" duration="00:00:00.0002270" startTime="2026-10-21T13:15:41.6441259+00:00" endTime="2026-10-21T13:15:41.6441819+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e9dfadad-01c3-4686-bd37-d9d58e435d37" />
+    <UnitTestResult executionId="eeaba80d-16c4-4f36-97e1-43e595ccd51a" testId="226ad261-9d6c-03a4-030f-3ba80119af98" testName="SmartNote.Tests.ShortcutTests.ExistingSettingsKeepDefaultShortcut" computerName="eaa0edc636d1" duration="00:00:00.0177380" startTime="2026-10-21T13:15:41.6448694+00:00" endTime="2026-10-21T13:15:41.6449377+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eeaba80d-16c4-4f36-97e1-43e595ccd51a" />
+    <UnitTestResult executionId="816b89ef-1a22-4324-a590-ec10fb21eff0" testId="6f80f86e-2525-f930-ae69-b7754d8ed7fd" testName="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Ctrl+Ctrl+A&quot;)" computerName="eaa0edc636d1" duration="00:00:00.0000086" startTime="2026-10-21T13:15:41.5931880+00:00" endTime="2026-10-21T13:15:41.5932252+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="816b89ef-1a22-4324-a590-ec10fb21eff0" />
+    <UnitTestResult executionId="9068e279-1d80-4806-907c-564bb47ec2e7" testId="7a6bafb9-1a19-e396-d996-8811c42fb5f2" testName="SmartNote.Tests.PersistenceTests.TransactionFailureRollsBackNoteHistoryAndTask" computerName="eaa0edc636d1" duration="00:00:00.0057119" startTime="2026-10-21T13:15:41.7840406+00:00" endTime="2026-10-21T13:15:41.7883649+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9068e279-1d80-4806-907c-564bb47ec2e7" />
+    <UnitTestResult executionId="5a75fd3b-7a20-4abc-a49e-6fadd229039b" testId="cff9dbea-f758-dd48-1dde-f2850e71544e" testName="SmartNote.Tests.PersistenceTests.POC009_SaveReopenRestoresJsonAndTasks" computerName="eaa0edc636d1" duration="00:00:00.0068183" startTime="2026-10-21T13:15:41.7705637+00:00" endTime="2026-10-21T13:15:41.7770344+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5a75fd3b-7a20-4abc-a49e-6fadd229039b" />
+    <UnitTestResult executionId="3d2d8338-eed2-44a7-b5ce-7ce1c6dc0958" testId="b27fdc69-a19e-b29b-8950-b91d162ef34e" testName="SmartNote.Tests.PersistenceTests.CorruptDatabaseIsNotReplaced" computerName="eaa0edc636d1" duration="00:00:00.0152367" startTime="2026-10-21T13:15:41.7148960+00:00" endTime="2026-10-21T13:15:41.7313924+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3d2d8338-eed2-44a7-b5ce-7ce1c6dc0958" />
+    <UnitTestResult executionId="1577402c-f3da-42dc-b310-2e87c1965d50" testId="1f241d44-4e67-0dae-ead5-292119ab50e6" testName="SmartNote.Tests.PersistenceTests.InvalidAttachmentOriginsAreRejected(origin: &quot;https://user@media.smartnote.local/&quot;)" computerName="eaa0edc636d1" duration="00:00:00.0007611" startTime="2026-10-21T13:15:41.8185951+00:00" endTime="2026-10-21T13:15:41.8187069+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1577402c-f3da-42dc-b310-2e87c1965d50" />
+    <UnitTestResult executionId="e6833d6b-0344-4cd9-be22-56385b02e71e" testId="27d8f21a-9e0b-e5bd-8054-73ded1c136d1" testName="SmartNote.Tests.ShortcutTests.SaveFailureRollsBackOnlyNewRegistration" computerName="eaa0edc636d1" duration="00:00:00.0009522" startTime="2026-10-21T13:15:41.6514153+00:00" endTime="2026-10-21T13:15:41.6515205+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e6833d6b-0344-4cd9-be22-56385b02e71e" />
+    <UnitTestResult executionId="9391b0aa-fc00-452f-8525-0298dfffb824" testId="103b2030-5996-3461-f6a4-384590c1f219" testName="SmartNote.Tests.PersistenceTests.ReorderingPreservesTaskIdentityAndDeletingRemovesDerivedTask" computerName="eaa0edc636d1" duration="00:00:00.0064351" startTime="2026-10-21T13:15:41.8196390+00:00" endTime="2026-10-21T13:15:41.8266963+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9391b0aa-fc00-452f-8525-0298dfffb824" />
+    <UnitTestResult executionId="a25c7e54-2d4c-4a76-a11b-9f0a6dc68e1f" testId="c53a3a84-7ba8-6e42-7860-65d0a807ab3f" testName="SmartNote.Tests.PersistenceTests.InvalidAttachmentOriginsAreRejected(origin: &quot;https://media.smartnote.local:444/&quot;)" computerName="eaa0edc636d1" duration="00:00:00.0004814" startTime="2026-10-21T13:15:41.8188258+00:00" endTime="2026-10-21T13:15:41.8189299+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a25c7e54-2d4c-4a76-a11b-9f0a6dc68e1f" />
+    <UnitTestResult executionId="32e194fb-f8e1-4d95-b018-7c92cdef8237" testId="ffd19ab7-fc66-6cb3-cfad-460ec451c107" testName="SmartNote.Tests.ShortcutTests.ReplacementRetainsOldUntilPersistenceCompletes" computerName="eaa0edc636d1" duration="00:00:00.0344962" startTime="2026-10-21T13:15:41.6450902+00:00" endTime="2026-10-21T13:15:41.6451609+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="32e194fb-f8e1-4d95-b018-7c92cdef8237" />
+    <UnitTestResult executionId="4ec74691-068d-4e86-92e5-e2243faecb5c" testId="7d0c41d5-688e-c5ab-9258-6fd0e44f207d" testName="SmartNote.Tests.PersistenceTests.POC013_015_TenNotesAndSessionSettingsSurviveReopen" computerName="eaa0edc636d1" duration="00:00:00.0226556" startTime="2026-10-21T13:15:41.7318310+00:00" endTime="2026-10-21T13:15:41.7569437+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4ec74691-068d-4e86-92e5-e2243faecb5c" />
+    <UnitTestResult executionId="ab9610f6-2219-4d2a-b548-a73ec94acd1b" testId="44a40bbe-30e2-69a7-daf6-4c710a69b5cb" testName="SmartNote.Tests.PersistenceTests.FutureSchemaIsNotDowngraded" computerName="eaa0edc636d1" duration="00:00:00.1442320" startTime="2026-10-21T13:15:41.5121492+00:00" endTime="2026-10-21T13:15:41.6700823+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ab9610f6-2219-4d2a-b548-a73ec94acd1b" />
+    <UnitTestResult executionId="c101ddba-7b0c-4741-bae6-0facd9b8fc5d" testId="8836b812-e8d0-0cf3-eb8d-1ca8a8a6999f" testName="SmartNote.Tests.PersistenceTests.POC011_TaskCompletionAndReopeningPatchNoteAtomically" computerName="eaa0edc636d1" duration="00:00:00.6450418" startTime="2026-10-21T13:15:41.8532359+00:00" endTime="2026-10-21T13:15:42.4999387+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c101ddba-7b0c-4741-bae6-0facd9b8fc5d" />
+    <UnitTestResult executionId="455f2ea1-ed79-46fb-845f-8046316b22ec" testId="2308428d-6418-0eb0-e57c-7b65db798b03" testName="SmartNote.Tests.PersistenceTests.POC019_StaleRevisionDoesNotOverwrite" computerName="eaa0edc636d1" duration="00:00:00.0072196" startTime="2026-10-21T13:15:41.7571713+00:00" endTime="2026-10-21T13:15:41.7627397+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="455f2ea1-ed79-46fb-845f-8046316b22ec" />
+    <UnitTestResult executionId="d554aceb-e324-4061-ac90-6f1839e0e2fc" testId="e6332c1f-9408-a8ef-4546-c0e193d13b2a" testName="SmartNote.Tests.ShortcutTests.ParsesSupportedKeys(text: &quot;Ctrl+0&quot;, modifiers: 2, key: 48)" computerName="eaa0edc636d1" duration="00:00:00.0000040" startTime="2026-10-21T13:15:41.6446437+00:00" endTime="2026-10-21T13:15:41.6446986+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d554aceb-e324-4061-ac90-6f1839e0e2fc" />
+    <UnitTestResult executionId="d9d23362-4ea9-480e-9df1-4170460e3b23" testId="2abaf94b-f096-73f4-8a36-cc4c00094404" testName="SmartNote.Tests.PersistenceTests.POC010_012_RepeatedSaveUpsertsTaskAndUpdatesBothStates" computerName="eaa0edc636d1" duration="00:00:00.0132539" startTime="2026-10-21T13:15:41.7885360+00:00" endTime="2026-10-21T13:15:41.8022219+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d9d23362-4ea9-480e-9df1-4170460e3b23" />
+    <UnitTestResult executionId="99bb74a0-ec0e-4e52-898a-d160ca25f57f" testId="40e35569-dc61-1c8e-9e62-f52ab123d7d4" testName="SmartNote.Tests.PersistenceTests.MissingManagedAttachmentRejectsSaveValidation" computerName="eaa0edc636d1" duration="00:00:00.0411479" startTime="2026-10-21T13:15:41.6718693+00:00" endTime="2026-10-21T13:15:41.7146256+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="99bb74a0-ec0e-4e52-898a-d160ca25f57f" />
+    <UnitTestResult executionId="6591128c-80e2-47fe-8b2d-08838ad72620" testId="9888bb1c-15dd-b3d0-6204-5259223a4266" testName="SmartNote.Tests.ShortcutTests.ParsesSupportedKeys(text: &quot;Ctrl+Alt+M&quot;, modifiers: 3, key: 77)" computerName="eaa0edc636d1" duration="00:00:00.0000372" startTime="2026-10-21T13:15:41.6442887+00:00" endTime="2026-10-21T13:15:41.6443451+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6591128c-80e2-47fe-8b2d-08838ad72620" />
+    <UnitTestResult executionId="0347def6-666a-414d-b338-9a41bfa5a945" testId="dc962bc8-59f3-226b-c3b2-27393dbddc80" testName="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: null)" computerName="eaa0edc636d1" duration="00:00:00.0000040" startTime="2026-10-21T13:15:41.6148245+00:00" endTime="2026-10-21T13:15:41.6148600+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0347def6-666a-414d-b338-9a41bfa5a945" />
+    <UnitTestResult executionId="cac55678-32c7-45ed-93dc-1582f145dadf" testId="8119b68c-f73b-6fdf-90da-b637aec54939" testName="SmartNote.Tests.PersistenceTests.QuickShortcutSettingSurvivesDatabaseReopen" computerName="eaa0edc636d1" duration="00:00:00.0141481" startTime="2026-10-21T13:15:41.8025068+00:00" endTime="2026-10-21T13:15:41.8183276+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cac55678-32c7-45ed-93dc-1582f145dadf" />
+    <UnitTestResult executionId="7da2f739-d7df-4535-8e81-431910fd83de" testId="bded19c9-46e8-d485-ec93-24399e209d70" testName="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Alt+F4&quot;)" computerName="eaa0edc636d1" duration="00:00:00.0000113" startTime="2026-10-21T13:15:41.5933000+00:00" endTime="2026-10-21T13:15:41.6139957+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7da2f739-d7df-4535-8e81-431910fd83de" />
+    <UnitTestResult executionId="5bf53fa3-4351-4551-a7fc-994f3f3174b3" testId="286ebe5a-db40-728c-1302-d225960949ba" testName="SmartNote.Tests.PersistenceTests.POC018_QuickMemoRestoresAsTemporaryNote" computerName="eaa0edc636d1" duration="00:00:00.0048063" startTime="2026-10-21T13:15:41.7777829+00:00" endTime="2026-10-21T13:15:41.7838770+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5bf53fa3-4351-4551-a7fc-994f3f3174b3" />
+    <UnitTestResult executionId="98318ae6-7992-4253-96f0-541afb961142" testId="44174d7b-6c2e-6810-5a34-d42f44dc0b03" testName="SmartNote.Tests.PersistenceTests.TaskTransactionFailureRollsBackBothSides" computerName="eaa0edc636d1" duration="00:00:00.0062719" startTime="2026-10-21T13:15:41.8342613+00:00" endTime="2026-10-21T13:15:41.8397712+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="98318ae6-7992-4253-96f0-541afb961142" />
+    <UnitTestResult executionId="9a1d9bc0-0b7c-4b2d-a27b-3e0586649e50" testId="974bbad4-a9d0-be83-f547-10fc9df11e3b" testName="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Ctrl+F12&quot;)" computerName="eaa0edc636d1" duration="00:00:00.0000036" startTime="2026-10-21T13:15:41.6147075+00:00" endTime="2026-10-21T13:15:41.6147447+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9a1d9bc0-0b7c-4b2d-a27b-3e0586649e50" />
+    <UnitTestResult executionId="e275db0d-698d-4ec2-b942-738c3d7eae66" testId="32a3a5e1-56e1-5101-a676-4d08cc44efa5" testName="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Ctrl+F01&quot;)" computerName="eaa0edc636d1" duration="00:00:00.0000047" startTime="2026-10-21T13:15:41.6143367+00:00" endTime="2026-10-21T13:15:41.6143796+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e275db0d-698d-4ec2-b942-738c3d7eae66" />
+    <UnitTestResult executionId="a2c4360d-aed5-484c-8276-57a17422ff95" testId="5147a7a9-779b-568e-28eb-d11e67aefc60" testName="SmartNote.Tests.ShortcutTests.ParsesSupportedKeys(text: &quot;Alt+F24&quot;, modifiers: 1, key: 135)" computerName="eaa0edc636d1" duration="00:00:00.0055949" startTime="2026-10-21T13:15:41.6439407+00:00" endTime="2026-10-21T13:15:41.6440128+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a2c4360d-aed5-484c-8276-57a17422ff95" />
+    <UnitTestResult executionId="bfe5bacf-bc41-4c9c-a919-5fd14ea9912a" testId="7b7f7ddb-e261-df36-bbee-2c647fc48c79" testName="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Ctrl+F25&quot;)" computerName="eaa0edc636d1" duration="00:00:00.0002042" startTime="2026-10-21T13:15:41.5925214+00:00" endTime="2026-10-21T13:15:41.5926836+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bfe5bacf-bc41-4c9c-a919-5fd14ea9912a" />
+    <UnitTestResult executionId="a36695bb-855f-4aa3-9311-4ed20c21fb20" testId="1b4b0bfd-ab9e-2ea7-8ede-a48c057f4ec0" testName="SmartNote.Tests.ShortcutTests.ParsesSupportedKeys(text: &quot;&quot;, modifiers: 0, key: 0)" computerName="eaa0edc636d1" duration="00:00:00.0000033" startTime="2026-10-21T13:15:41.6444458+00:00" endTime="2026-10-21T13:15:41.6445391+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a36695bb-855f-4aa3-9311-4ed20c21fb20" />
+    <UnitTestResult executionId="0bb7cdeb-72e0-4c9f-8f88-87e0e3e6b156" testId="67a78264-d535-5cf0-fee9-0070b607ed4c" testName="SmartNote.Tests.PersistenceTests.BackupAndHistoryRetainPreviousVersions" computerName="eaa0edc636d1" duration="00:00:00.0062880" startTime="2026-10-21T13:15:41.8462379+00:00" endTime="2026-10-21T13:15:41.8530121+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0bb7cdeb-72e0-4c9f-8f88-87e0e3e6b156" />
+    <UnitTestResult executionId="421ca136-fd87-48eb-8e11-71e0b1c1b2fc" testId="5b375e63-5ff6-5b7b-c3b3-4e4dc8b49f93" testName="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;M&quot;)" computerName="eaa0edc636d1" duration="00:00:00.0000156" startTime="2026-10-21T13:15:41.6425122+00:00" endTime="2026-10-21T13:15:41.6426394+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="421ca136-fd87-48eb-8e11-71e0b1c1b2fc" />
+    <UnitTestResult executionId="86072cfa-b7f7-4cee-a1a1-987e4834128d" testId="a83fbcac-e668-b4e8-e9d3-e531860affed" testName="SmartNote.Tests.PersistenceTests.InvalidAttachmentOriginsAreRejected(origin: &quot;https://evil.example/&quot;)" computerName="eaa0edc636d1" duration="00:00:00.0011221" startTime="2026-10-21T13:15:41.8190482+00:00" endTime="2026-10-21T13:15:41.8193114+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="86072cfa-b7f7-4cee-a1a1-987e4834128d" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.InvalidAttachmentOriginsAreRejected(origin: &quot;https://evil.example/&quot;)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="a83fbcac-e668-b4e8-e9d3-e531860affed">
+      <Execution id="86072cfa-b7f7-4cee-a1a1-987e4834128d" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="InvalidAttachmentOriginsAreRejected" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.DisableIsTransactionalAndSameKeyDoesNotReregister" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="b28239b8-2dc5-72b6-9fff-fcd9bd60bbe8">
+      <Execution id="4ecc9237-18e8-4a16-ad5a-2594426a07f5" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="DisableIsTransactionalAndSameKeyDoesNotReregister" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.ParsesSupportedKeys(text: &quot;&quot;, modifiers: 0, key: 0)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="1b4b0bfd-ab9e-2ea7-8ede-a48c057f4ec0">
+      <Execution id="a36695bb-855f-4aa3-9311-4ed20c21fb20" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="ParsesSupportedKeys" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.CorruptDatabaseIsNotReplaced" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="b27fdc69-a19e-b29b-8950-b91d162ef34e">
+      <Execution id="3d2d8338-eed2-44a7-b5ce-7ce1c6dc0958" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="CorruptDatabaseIsNotReplaced" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: null)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="dc962bc8-59f3-226b-c3b2-27393dbddc80">
+      <Execution id="0347def6-666a-414d-b338-9a41bfa5a945" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="RejectsUnsafeOrMalformedShortcut" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.ParsesSupportedKeys(text: &quot;Shift+Ctrl+Q&quot;, modifiers: 6, key: 81)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="b895c9b3-96f2-ff32-0af2-e3150399ddc4">
+      <Execution id="e9dfadad-01c3-4686-bd37-d9d58e435d37" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="ParsesSupportedKeys" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Ctrl+F25&quot;)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="7b7f7ddb-e261-df36-bbee-2c647fc48c79">
+      <Execution id="bfe5bacf-bc41-4c9c-a919-5fd14ea9912a" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="RejectsUnsafeOrMalformedShortcut" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.TransactionFailureRollsBackNoteHistoryAndTask" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="7a6bafb9-1a19-e396-d996-8811c42fb5f2">
+      <Execution id="9068e279-1d80-4806-907c-564bb47ec2e7" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="TransactionFailureRollsBackNoteHistoryAndTask" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.POC013_015_TenNotesAndSessionSettingsSurviveReopen" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="7d0c41d5-688e-c5ab-9258-6fd0e44f207d">
+      <Execution id="4ec74691-068d-4e86-92e5-e2243faecb5c" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="POC013_015_TenNotesAndSessionSettingsSurviveReopen" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.POC010_012_RepeatedSaveUpsertsTaskAndUpdatesBothStates" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="2abaf94b-f096-73f4-8a36-cc4c00094404">
+      <Execution id="d9d23362-4ea9-480e-9df1-4170460e3b23" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="POC010_012_RepeatedSaveUpsertsTaskAndUpdatesBothStates" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.ExistingSettingsKeepDefaultShortcut" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="226ad261-9d6c-03a4-030f-3ba80119af98">
+      <Execution id="eeaba80d-16c4-4f36-97e1-43e595ccd51a" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="ExistingSettingsKeepDefaultShortcut" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.POC011_TaskCompletionAndReopeningPatchNoteAtomically" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="8836b812-e8d0-0cf3-eb8d-1ca8a8a6999f">
+      <Execution id="c101ddba-7b0c-4741-bae6-0facd9b8fc5d" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="POC011_TaskCompletionAndReopeningPatchNoteAtomically" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Alt+F4&quot;)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="bded19c9-46e8-d485-ec93-24399e209d70">
+      <Execution id="7da2f739-d7df-4535-8e81-431910fd83de" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="RejectsUnsafeOrMalformedShortcut" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.ParsesSupportedKeys(text: &quot;Ctrl+0&quot;, modifiers: 2, key: 48)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="e6332c1f-9408-a8ef-4546-c0e193d13b2a">
+      <Execution id="d554aceb-e324-4061-ac90-6f1839e0e2fc" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="ParsesSupportedKeys" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.MissingManagedAttachmentRejectsSaveValidation" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="40e35569-dc61-1c8e-9e62-f52ab123d7d4">
+      <Execution id="99bb74a0-ec0e-4e52-898a-d160ca25f57f" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="MissingManagedAttachmentRejectsSaveValidation" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.ParsesSupportedKeys(text: &quot;Alt+F24&quot;, modifiers: 1, key: 135)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="5147a7a9-779b-568e-28eb-d11e67aefc60">
+      <Execution id="a2c4360d-aed5-484c-8276-57a17422ff95" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="ParsesSupportedKeys" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Win+M&quot;)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="b230d3f8-a1e9-0019-af5b-ef0d0617b33b">
+      <Execution id="e476c017-ccf9-4607-9e1e-178cd61b80c0" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="RejectsUnsafeOrMalformedShortcut" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.ParsesSupportedKeys(text: &quot;Ctrl+Alt+M&quot;, modifiers: 3, key: 77)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="9888bb1c-15dd-b3d0-6204-5259223a4266">
+      <Execution id="6591128c-80e2-47fe-8b2d-08838ad72620" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="ParsesSupportedKeys" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.POC008_ImageReferenceAndBytesSurviveSaveReopen" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="563a158c-60ee-8e43-1d2c-5fcbed68055a">
+      <Execution id="e7318105-7b8c-4986-8da4-6f368b0eab8e" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="POC008_ImageReferenceAndBytesSurviveSaveReopen" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;M&quot;)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="5b375e63-5ff6-5b7b-c3b3-4e4dc8b49f93">
+      <Execution id="421ca136-fd87-48eb-8e11-71e0b1c1b2fc" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="RejectsUnsafeOrMalformedShortcut" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.QuickShortcutSettingSurvivesDatabaseReopen" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="8119b68c-f73b-6fdf-90da-b637aec54939">
+      <Execution id="cac55678-32c7-45ed-93dc-1582f145dadf" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="QuickShortcutSettingSurvivesDatabaseReopen" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.AttachmentFailureDoesNotRegisterAReference" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="36fa0ae6-2541-530c-2bb2-b2b38559caf5">
+      <Execution id="8d900e79-8aea-4c23-9011-8f5047fe08fb" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="AttachmentFailureDoesNotRegisterAReference" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Shift+M&quot;)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="94e056e1-b362-4890-7b1c-b95bbae930b5">
+      <Execution id="d5288a4f-34bd-4d38-a2ba-ea79e4402632" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="RejectsUnsafeOrMalformedShortcut" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.POC018_QuickMemoRestoresAsTemporaryNote" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="286ebe5a-db40-728c-1302-d225960949ba">
+      <Execution id="5bf53fa3-4351-4551-a7fc-994f3f3174b3" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="POC018_QuickMemoRestoresAsTemporaryNote" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Ctrl+F01&quot;)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="32a3a5e1-56e1-5101-a676-4d08cc44efa5">
+      <Execution id="e275db0d-698d-4ec2-b942-738c3d7eae66" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="RejectsUnsafeOrMalformedShortcut" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.BackupAndHistoryRetainPreviousVersions" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="67a78264-d535-5cf0-fee9-0070b607ed4c">
+      <Execution id="0bb7cdeb-72e0-4c9f-8f88-87e0e3e6b156" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="BackupAndHistoryRetainPreviousVersions" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.InvalidDuplicateBlockIdsAreRejectedBeforeWrite" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="284623d2-50f3-7ea8-8b36-dc4353584077">
+      <Execution id="fd612f9a-c2e7-422f-9c0b-2ebad907faf7" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="InvalidDuplicateBlockIdsAreRejectedBeforeWrite" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.RegistrationConflictDoesNotSaveOrUnregisterOld" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="3562b8b7-1a88-b866-2359-b4b8a19cad0b">
+      <Execution id="ad556ce1-ff80-481b-b8c7-084752f2c857" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="RegistrationConflictDoesNotSaveOrUnregisterOld" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.InvalidAttachmentOriginsAreRejected(origin: &quot;https://media.smartnote.local:444/&quot;)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="c53a3a84-7ba8-6e42-7860-65d0a807ab3f">
+      <Execution id="a25c7e54-2d4c-4a76-a11b-9f0a6dc68e1f" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="InvalidAttachmentOriginsAreRejected" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.POC009_SaveReopenRestoresJsonAndTasks" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="cff9dbea-f758-dd48-1dde-f2850e71544e">
+      <Execution id="5a75fd3b-7a20-4abc-a49e-6fadd229039b" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="POC009_SaveReopenRestoresJsonAndTasks" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.TaskTransactionFailureRollsBackBothSides" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="44174d7b-6c2e-6810-5a34-d42f44dc0b03">
+      <Execution id="98318ae6-7992-4253-96f0-541afb961142" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="TaskTransactionFailureRollsBackBothSides" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.SaveFailureRollsBackOnlyNewRegistration" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="27d8f21a-9e0b-e5bd-8054-73ded1c136d1">
+      <Execution id="e6833d6b-0344-4cd9-be22-56385b02e71e" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="SaveFailureRollsBackOnlyNewRegistration" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.ReplacementRetainsOldUntilPersistenceCompletes" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="ffd19ab7-fc66-6cb3-cfad-460ec451c107">
+      <Execution id="32e194fb-f8e1-4d95-b018-7c92cdef8237" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="ReplacementRetainsOldUntilPersistenceCompletes" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Ctrl+F12&quot;)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="974bbad4-a9d0-be83-f547-10fc9df11e3b">
+      <Execution id="9a1d9bc0-0b7c-4b2d-a27b-3e0586649e50" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="RejectsUnsafeOrMalformedShortcut" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.InvalidAttachmentOriginsAreRejected(origin: &quot;https://user@media.smartnote.local/&quot;)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="1f241d44-4e67-0dae-ead5-292119ab50e6">
+      <Execution id="1577402c-f3da-42dc-b310-2e87c1965d50" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="InvalidAttachmentOriginsAreRejected" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.POC019_StaleRevisionDoesNotOverwrite" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="2308428d-6418-0eb0-e57c-7b65db798b03">
+      <Execution id="455f2ea1-ed79-46fb-845f-8046316b22ec" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="POC019_StaleRevisionDoesNotOverwrite" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.ShortcutTests.RejectsUnsafeOrMalformedShortcut(text: &quot;Ctrl+Ctrl+A&quot;)" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="6f80f86e-2525-f930-ae69-b7754d8ed7fd">
+      <Execution id="816b89ef-1a22-4324-a590-ec10fb21eff0" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.ShortcutTests" name="RejectsUnsafeOrMalformedShortcut" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.ReorderingPreservesTaskIdentityAndDeletingRemovesDerivedTask" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="103b2030-5996-3461-f6a4-384590c1f219">
+      <Execution id="9391b0aa-fc00-452f-8525-0298dfffb824" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="ReorderingPreservesTaskIdentityAndDeletingRemovesDerivedTask" />
+    </UnitTest>
+    <UnitTest name="SmartNote.Tests.PersistenceTests.FutureSchemaIsNotDowngraded" storage="/workspace/smartnoteai/smartnote.tests/bin/release/net10.0/smartnote.tests.dll" id="44a40bbe-30e2-69a7-daf6-4c710a69b5cb">
+      <Execution id="ab9610f6-2219-4d2a-b548-a73ec94acd1b" />
+      <TestMethod codeBase="/workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="SmartNote.Tests.PersistenceTests" name="FutureSchemaIsNotDowngraded" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="36fa0ae6-2541-530c-2bb2-b2b38559caf5" executionId="8d900e79-8aea-4c23-9011-8f5047fe08fb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="563a158c-60ee-8e43-1d2c-5fcbed68055a" executionId="e7318105-7b8c-4986-8da4-6f368b0eab8e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="284623d2-50f3-7ea8-8b36-dc4353584077" executionId="fd612f9a-c2e7-422f-9c0b-2ebad907faf7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3562b8b7-1a88-b866-2359-b4b8a19cad0b" executionId="ad556ce1-ff80-481b-b8c7-084752f2c857" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b230d3f8-a1e9-0019-af5b-ef0d0617b33b" executionId="e476c017-ccf9-4607-9e1e-178cd61b80c0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="94e056e1-b362-4890-7b1c-b95bbae930b5" executionId="d5288a4f-34bd-4d38-a2ba-ea79e4402632" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b28239b8-2dc5-72b6-9fff-fcd9bd60bbe8" executionId="4ecc9237-18e8-4a16-ad5a-2594426a07f5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b895c9b3-96f2-ff32-0af2-e3150399ddc4" executionId="e9dfadad-01c3-4686-bd37-d9d58e435d37" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="226ad261-9d6c-03a4-030f-3ba80119af98" executionId="eeaba80d-16c4-4f36-97e1-43e595ccd51a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6f80f86e-2525-f930-ae69-b7754d8ed7fd" executionId="816b89ef-1a22-4324-a590-ec10fb21eff0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7a6bafb9-1a19-e396-d996-8811c42fb5f2" executionId="9068e279-1d80-4806-907c-564bb47ec2e7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cff9dbea-f758-dd48-1dde-f2850e71544e" executionId="5a75fd3b-7a20-4abc-a49e-6fadd229039b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b27fdc69-a19e-b29b-8950-b91d162ef34e" executionId="3d2d8338-eed2-44a7-b5ce-7ce1c6dc0958" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f241d44-4e67-0dae-ead5-292119ab50e6" executionId="1577402c-f3da-42dc-b310-2e87c1965d50" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="27d8f21a-9e0b-e5bd-8054-73ded1c136d1" executionId="e6833d6b-0344-4cd9-be22-56385b02e71e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="103b2030-5996-3461-f6a4-384590c1f219" executionId="9391b0aa-fc00-452f-8525-0298dfffb824" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c53a3a84-7ba8-6e42-7860-65d0a807ab3f" executionId="a25c7e54-2d4c-4a76-a11b-9f0a6dc68e1f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ffd19ab7-fc66-6cb3-cfad-460ec451c107" executionId="32e194fb-f8e1-4d95-b018-7c92cdef8237" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7d0c41d5-688e-c5ab-9258-6fd0e44f207d" executionId="4ec74691-068d-4e86-92e5-e2243faecb5c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="44a40bbe-30e2-69a7-daf6-4c710a69b5cb" executionId="ab9610f6-2219-4d2a-b548-a73ec94acd1b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8836b812-e8d0-0cf3-eb8d-1ca8a8a6999f" executionId="c101ddba-7b0c-4741-bae6-0facd9b8fc5d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2308428d-6418-0eb0-e57c-7b65db798b03" executionId="455f2ea1-ed79-46fb-845f-8046316b22ec" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e6332c1f-9408-a8ef-4546-c0e193d13b2a" executionId="d554aceb-e324-4061-ac90-6f1839e0e2fc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2abaf94b-f096-73f4-8a36-cc4c00094404" executionId="d9d23362-4ea9-480e-9df1-4170460e3b23" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="40e35569-dc61-1c8e-9e62-f52ab123d7d4" executionId="99bb74a0-ec0e-4e52-898a-d160ca25f57f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9888bb1c-15dd-b3d0-6204-5259223a4266" executionId="6591128c-80e2-47fe-8b2d-08838ad72620" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dc962bc8-59f3-226b-c3b2-27393dbddc80" executionId="0347def6-666a-414d-b338-9a41bfa5a945" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8119b68c-f73b-6fdf-90da-b637aec54939" executionId="cac55678-32c7-45ed-93dc-1582f145dadf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bded19c9-46e8-d485-ec93-24399e209d70" executionId="7da2f739-d7df-4535-8e81-431910fd83de" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="286ebe5a-db40-728c-1302-d225960949ba" executionId="5bf53fa3-4351-4551-a7fc-994f3f3174b3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="44174d7b-6c2e-6810-5a34-d42f44dc0b03" executionId="98318ae6-7992-4253-96f0-541afb961142" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="974bbad4-a9d0-be83-f547-10fc9df11e3b" executionId="9a1d9bc0-0b7c-4b2d-a27b-3e0586649e50" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="32a3a5e1-56e1-5101-a676-4d08cc44efa5" executionId="e275db0d-698d-4ec2-b942-738c3d7eae66" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5147a7a9-779b-568e-28eb-d11e67aefc60" executionId="a2c4360d-aed5-484c-8276-57a17422ff95" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7b7f7ddb-e261-df36-bbee-2c647fc48c79" executionId="bfe5bacf-bc41-4c9c-a919-5fd14ea9912a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b4b0bfd-ab9e-2ea7-8ede-a48c057f4ec0" executionId="a36695bb-855f-4aa3-9311-4ed20c21fb20" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="67a78264-d535-5cf0-fee9-0070b607ed4c" executionId="0bb7cdeb-72e0-4c9f-8f88-87e0e3e6b156" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5b375e63-5ff6-5b7b-c3b3-4e4dc8b49f93" executionId="421ca136-fd87-48eb-8e11-71e0b1c1b2fc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a83fbcac-e668-b4e8-e9d3-e531860affed" executionId="86072cfa-b7f7-4cee-a1a1-987e4834128d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="39" executed="39" passed="39" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v4.0.1+0f7d528729 (64-bit .NET 10.0.13)
+[xUnit.net 00:00:00.10]   Discovering: SmartNote.Tests
+[xUnit.net 00:00:00.18]   Discovered:  SmartNote.Tests
+[xUnit.net 00:00:00.22]   Starting:    SmartNote.Tests
+[xUnit.net 00:00:01.25]   Finished:    SmartNote.Tests
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

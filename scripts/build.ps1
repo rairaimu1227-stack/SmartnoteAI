@@ -18,4 +18,4 @@ Run { dotnet test SmartNote.Tests -c Release --no-build --logger 'trx;LogFileNam
 Run { dotnet publish SmartNote.Desktop -c Release -r win-x64 --self-contained true --no-restore -o artifacts/win-x64 -p:PublishReadyToRun=false }
 Copy-Item *.md artifacts/win-x64/ -Force
 Copy-Item docs artifacts/win-x64/ -Recurse -Force
-Compress-Archive -Path artifacts/win-x64/* -DestinationPath artifacts/SmartNoteAI-PoC-v0.1-win-x64.zip -Force
+Compress-Archive -Path artifacts/win-x64/* -DestinationPath artifacts/SmartNoteAI-PoC-v0.1.1-win-x64.zip -Force

@@ -259,4 +259,13 @@ public sealed class PersistenceTests : IDisposable
         await Assert.ThrowsAsync<SqliteException>(() => new SqliteRepository(Db).InitializeAsync());
         Assert.Equal(bytes, await File.ReadAllBytesAsync(Db));
     }
+    [Fact]
+    public async Task QuickShortcutSettingSurvivesDatabaseReopen()
+    {
+        var (repo, _) = await Open();
+        await repo.WriteStateAsync("preferences", System.Text.Json.JsonSerializer.Serialize(new Preferences(QuickShortcut: "Ctrl+Shift+Q")));
+        var (reopened, _) = await Open();
+        var restored = System.Text.Json.JsonSerializer.Deserialize<Preferences>((await reopened.ReadStateAsync("preferences"))!);
+        Assert.Equal("Ctrl+Shift+Q", restored!.QuickShortcut);
+    }
 }

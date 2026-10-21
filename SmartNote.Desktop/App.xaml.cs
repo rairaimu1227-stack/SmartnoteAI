@@ -57,8 +57,11 @@ public partial class App : System.Windows.Application, INotificationService
             tray = new Forms.NotifyIcon { Icon = System.Drawing.SystemIcons.Application, Text = "SmartNote AI", Visible = true, ContextMenuStrip = menu };
             tray.DoubleClick += (_, _) => Shell.ShowMain();
             hotkey = new(Shell, ShowQuick);
-            if (!hotkey.Registered)
-                Show("ショートカット登録失敗", "Ctrl+Alt+Mは他のアプリで使用中の可能性があります。通知領域メニューからクイックメモを開けます。");
+            try
+            {
+                await hotkey.ChangeAsync(Preferences.QuickShortcut, () => Task.CompletedTask);
+            }
+            catch (InvalidDataException ex) { Show("ショートカット登録失敗", ex.Message + " 設定画面で変更するか、通知領域メニューから開いてください。"); }
             _ = instance.ListenAsync(() => Dispatcher.BeginInvoke(() => Shell.ShowMain()));
             SystemEvents.UserPreferenceChanged += OnSystemPreferencesChanged;
             // Create WebView2 without showing the main window. All first launches start in the notification area.
@@ -79,17 +82,29 @@ public partial class App : System.Windows.Application, INotificationService
     {
         if (preferences.Theme is not ("system" or "light" or "dark"))
             throw new InvalidDataException("テーマが不正です。");
+        preferences = preferences with
+        {
+            QuickShortcut = QuickShortcut.Parse(preferences.QuickShortcut).Text
+        };
         await preferencesGate.WaitAsync();
         try
         {
             var previous = Preferences;
-            if (previous.AutoStart != preferences.AutoStart)
-                await StartupRegistration.SetAsync(preferences.AutoStart);
-            try
+            await hotkey!.ChangeAsync(preferences.QuickShortcut, async () =>
             {
-                await Repository.WriteStateAsync("preferences", JsonSerializer.Serialize(preferences));
-            }
-            catch { if (previous.AutoStart != preferences.AutoStart) await StartupRegistration.SetAsync(previous.AutoStart); throw; }
+                if (previous.AutoStart != preferences.AutoStart)
+                    await StartupRegistration.SetAsync(preferences.AutoStart);
+                try
+                {
+                    await Repository.WriteStateAsync("preferences", JsonSerializer.Serialize(preferences));
+                }
+                catch
+                {
+                    if (previous.AutoStart != preferences.AutoStart)
+                        await StartupRegistration.SetAsync(previous.AutoStart);
+                    throw;
+                }
+            });
             Preferences = preferences;
             Shell?.PreferencesChanged();
             if (quick is not null)

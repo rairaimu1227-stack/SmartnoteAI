@@ -4,7 +4,7 @@ namespace SmartNote.Core;
 public sealed record Note(string Id, string Title, JsonObject Document, long Revision, string CreatedAt, string UpdatedAt, bool IsQuick = false);
 public sealed record NoteTask(string Id, string NoteId, string BlockId, string Name, bool Completed, string CreatedAt, string UpdatedAt, long Revision, string? DueAt = null, string? Recurrence = null);
 public sealed record Checklist(string BlockId, string Name, bool Completed);
-public sealed record Preferences(bool Topmost = false, bool QuickTopmost = true, bool AutoStart = false, string Theme = "system");
+public sealed record Preferences(bool Topmost = false, bool QuickTopmost = true, bool AutoStart = false, string Theme = "system", string QuickShortcut = "Ctrl+Alt+M");
 public sealed class RevisionConflictException() : Exception("保存先が更新されています。未保存内容を保持しています。再読み込み前に内容を退避してください。");
 public static class Documents
 {

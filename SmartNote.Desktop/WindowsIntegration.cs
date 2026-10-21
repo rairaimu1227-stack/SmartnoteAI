@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Windows.Interop;
 using Microsoft.Win32;
+using SmartNote.Application;
 namespace SmartNote.Desktop;
 
 public sealed class SingleInstance : IDisposable
@@ -44,27 +45,27 @@ public sealed class SingleInstance : IDisposable
         cancellation.Dispose();
     }
 }
-public sealed class GlobalHotkey : IDisposable
+public sealed class GlobalHotkey : IDisposable, IShortcutRegistrar
 {
     [DllImport("user32.dll", SetLastError = true)] private static extern bool RegisterHotKey(IntPtr window, int id, uint modifiers, uint key);
     [DllImport("user32.dll")] private static extern bool UnregisterHotKey(IntPtr window, int id);
     private readonly HwndSource source;
     private readonly Action show;
-    public bool Registered
-    {
-        get;
-    }
+    private readonly ShortcutController controller;
+    public Task ChangeAsync(string shortcut, Func<Task> persist) => controller.ChangeAsync(shortcut, persist);
+    public bool Register(int id, uint modifiers, uint key) => RegisterHotKey(source.Handle, id, modifiers, key);
+    public void Unregister(int id) => UnregisterHotKey(source.Handle, id);
     public GlobalHotkey(Window window, Action show)
     {
         this.show = show;
         var handle = new WindowInteropHelper(window).EnsureHandle();
         source = HwndSource.FromHwnd(handle)!;
         source.AddHook(Hook);
-        Registered = RegisterHotKey(handle, 0x534e, 0x4000 | 0x0001 | 0x0002, 0x4d);
+        controller = new(this);
     }
     private IntPtr Hook(IntPtr hwnd, int message, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
-        if (message == 0x0312 && wParam.ToInt32() == 0x534e)
+        if (message == 0x0312 && wParam.ToInt32() == controller.ActiveId)
         {
             show();
             handled = true;
@@ -73,8 +74,7 @@ public sealed class GlobalHotkey : IDisposable
     }
     public void Dispose()
     {
-        if (Registered)
-            UnregisterHotKey(source.Handle, 0x534e);
+        controller.Dispose();
         source.RemoveHook(Hook);
     }
 }

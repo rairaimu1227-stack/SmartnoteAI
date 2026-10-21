@@ -1,4 +1,4 @@
-# SmartNote AI — PoC v0.1
+# SmartNote AI — PoC v0.1.1
 
 Windows向けのローカルメモアプリです。WPFの常駐シェルに、同梱WebView2 + Tiptap + Monacoを組み合わせています。AI/API通信・Google同期は実装していません。
 
@@ -13,9 +13,9 @@ Windows向けのローカルメモアプリです。WPFの常駐シェルに、�
 
 ## 配布版の起動
 
-GitHubから取得する場合: [PoC v0.1 配布ZIP](https://github.com/rairaimu1227-stack/SmartnoteAI/raw/refs/heads/poc-v0.1-download/artifacts/SmartNoteAI-PoC-v0.1-win-x64.zip)（約79MB）。[配布ブランチとSHA-256](https://github.com/rairaimu1227-stack/SmartnoteAI/tree/poc-v0.1-download/artifacts)も参照できます。Windows実機での動作確認は未実施です。
+GitHubから取得する場合: [PoC v0.1.1 配布ZIP](https://github.com/rairaimu1227-stack/SmartnoteAI/raw/refs/heads/poc-v0.1.1-download/artifacts/SmartNoteAI-PoC-v0.1.1-win-x64.zip)（約79MB）。[配布ブランチとSHA-256](https://github.com/rairaimu1227-stack/SmartnoteAI/tree/poc-v0.1.1-download/artifacts)も参照できます。Windows実機での動作確認は未実施です。
 
-`artifacts/SmartNoteAI-PoC-v0.1-win-x64.zip` を展開し、フォルダ内の `SmartNote.Desktop.exe` を実行します。exe単体ではなくフォルダ全体が必要です。
+`artifacts/SmartNoteAI-PoC-v0.1.1-win-x64.zip` を展開し、フォルダ内の `SmartNote.Desktop.exe` を実行します。exe単体ではなくフォルダ全体が必要です。
 
 初回を含めて通常起動は**通知領域へ常駐し、メイン画面を表示しません**。アイコンをダブルクリックするか、メニューの「メイン画面を表示」を選んでください。すぐ表示する場合:
 
@@ -23,7 +23,7 @@ GitHubから取得する場合: [PoC v0.1 配布ZIP](https://github.com/rairaimu
 .\SmartNote.Desktop.exe --show
 ```
 
-×は非表示、通知領域の「完全終了」は保存確認後の終了です。再実行は既存プロセスへ表示要求を送ります。Ctrl+Alt+Mでクイックメモを開きます。ホットキー競合時は通知とステータスに原因を表示し、通知領域メニューから開けます。
+×は非表示、通知領域の「完全終了」は保存確認後の終了です。再実行は既存プロセスへ表示要求を送ります。初期設定ではCtrl+Alt+Mでクイックメモを開きます。設定画面の「クイックメモのショートカット」で変更できます。ホットキー競合時は通知とステータスに原因を表示し、通知領域メニューから開けます。
 
 ## ビルドとテスト
 
@@ -67,6 +67,18 @@ Linux上でも.NET SDKとNodeを用意すればクロスビルドできます。
 - 設定の自動起動は初期OFFです。有効化するとユーザーのRunキーに現在のexeを登録します。配布先へ移動した場合はOFF/ONして再登録してください。
 - メイン最前面は初期OFF、クイックメモは初期ONで、独立して保存します。
 - クイックメモは通常一覧の「一時:」付きメモとして保存します。「保存して次のメモ」で別メモを開始します。
+
+## クイックメモのショートカット設定（v0.1.1）
+
+1. メイン画面で「設定」を開く。
+2. 「クイックメモのショートカット」でCtrl・Alt・Shiftとキーを選ぶ（例: Ctrl+Shift+Q）。
+3. 「ショートカットを保存」を押す。アプリ再起動なしで適用され、再起動後も保持される。
+
+CtrlまたはAltが必要です。英字・数字・F1～F24に対応し、F12とAlt+F4は除外します。他のアプリで使用中の組み合わせは拒否して案内します。新しいキーの登録や保存に失敗した場合、以前のキーと保存済み設定は維持します。
+
+「ショートカットを使用する」をOFFにして保存すると無効になります。通知領域のメニューからは引き続き開けます。「初期値に戻す」→保存でCtrl+Alt+Mに戻せます。旧版の設定ファイルはそのまま使えます。
+
+更新時は旧版を通知領域から完全終了してから、新しいZIPを別フォルダへ展開して起動してください。ユーザーデータは共通のLocalApplicationDataを使います。自動起動を有効にしている場合はOFF/ONして新しいexeのパスを登録し直してください。
 
 ## 元データを保護するテキストモード
 
