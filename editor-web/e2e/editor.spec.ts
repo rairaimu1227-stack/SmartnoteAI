@@ -73,14 +73,28 @@ async function boot(page: Page, unknown = false) {
         autoStart: false,
         theme: "system",
       };
+      const metadata: Record<string, any> = JSON.parse(
+        localStorage.getItem("test-task-meta") || "{}",
+      );
+      const findItems = (node: any): any[] => [
+        ...(node.type === "taskItem" ? [node] : []),
+        ...(node.content || []).flatMap(findItems),
+      ];
+      const nodeText = (node: any): string =>
+        node.text || (node.content || []).map(nodeText).join("");
       const tasks = () =>
-        notes.map((n: any) => ({
-          id: n.id,
-          noteId: n.id,
-          name: n.document.content[1].content[0].content[0].content[0].text,
-          completed: n.document.content[1].content[0].attrs.checked,
-          dueAt: null,
-        }));
+        notes.flatMap((n: any) =>
+          findItems(n.document).map((item: any, i: number) => ({
+            id: i === 0 ? n.id : `${n.id}:${item.attrs.blockId}`,
+            noteId: n.id,
+            name: nodeText(item),
+            completed: item.attrs.checked,
+            dueAt: null,
+            priority: 0,
+            revision: n.revision,
+            ...(metadata[n.id] || {}),
+          })),
+        );
       w.__test = {
         notes: () => notes,
         failSave: false,
@@ -116,12 +130,25 @@ async function boot(page: Page, unknown = false) {
                   ...structuredClone(m.data),
                   revision: m.data.revision + 1,
                 };
-                notes = notes.map((n: any) => (n.id === data.id ? data : n));
+                if (notes.some((n: any) => n.id === data.id))
+                  notes = notes.map((n: any) => (n.id === data.id ? data : n));
+                else notes.push(data);
                 localStorage.setItem("test-notes", JSON.stringify(notes));
                 break;
               case "session":
                 session = m.data;
                 localStorage.setItem("test-session", JSON.stringify(session));
+                break;
+              case "updateTask":
+                if (w.__test.failSave) throw Error("注入した保存失敗");
+                metadata[m.data.id] = {
+                  priority: m.data.priority,
+                  dueAt: m.data.dueAt,
+                };
+                localStorage.setItem(
+                  "test-task-meta",
+                  JSON.stringify(metadata),
+                );
                 break;
               case "toggleTask":
                 data = notes.find((n: any) => n.id === m.data.id);
@@ -159,6 +186,16 @@ async function boot(page: Page, unknown = false) {
   await page.goto("/index.html");
   await expect(page.locator("#status")).toHaveText("保存済み");
   await page.locator("[data-page=notes]").click();
+}
+async function switchMode(page: Page) {
+  if (
+    !(await page.locator("#advanced").getAttribute("open")) &&
+    !(await page
+      .locator("#advanced")
+      .evaluate((el: HTMLDetailsElement) => el.open))
+  )
+    await page.locator("#advanced summary").click();
+  await page.locator("#mode").click();
 }
 async function value(page: Page) {
   return page.evaluate(() => {
@@ -205,8 +242,10 @@ test("Tiptap editing, checklist task sync, image and ten tabs survive navigation
   expect(JSON.stringify((await value(page)).document)).toContain("更新");
   await page.locator("#rich input[type=checkbox]").check();
   await page.locator("[data-page=tasks]").click();
-  await expect(page.locator("#tasks input").first()).toBeChecked();
-  await page.locator("#tasks input").first().uncheck();
+  await expect(
+    page.locator("#tasks input[type=checkbox]").last(),
+  ).toBeChecked();
+  await page.locator("#tasks input[type=checkbox]").last().uncheck();
   await expect(page.locator("#tasks input").first()).not.toBeChecked();
   await page.locator("[data-page=home]").click();
   await page.locator("[data-page=notes]").click();
@@ -224,7 +263,7 @@ test("40 real mode transitions preserve image, marks, checked and blockId", asyn
 }) => {
   await boot(page);
   const before = (await value(page)).document;
-  for (let i = 0; i < 40; i++) await page.locator("#mode").click();
+  for (let i = 0; i < 40; i++) await switchMode(page);
   await page.locator("#save").click();
   await expect(page.locator("#status")).toHaveText("保存しました");
   expect((await value(page)).document).toEqual(before);
@@ -233,7 +272,7 @@ test("Monaco accepts text edits, rejects structural edits and retains invalid bu
   page,
 }) => {
   await boot(page);
-  await page.locator("#mode").click();
+  await switchMode(page);
   await page.locator(".monaco-editor").click();
   await page.keyboard.press("Control+Home");
   await page.keyboard.press("Control+f");
@@ -254,7 +293,7 @@ test("Monaco accepts text edits, rejects structural edits and retains invalid bu
   await page.locator(".monaco-editor").click();
   await page.keyboard.press("Control+Home");
   await page.keyboard.insertText("BROKEN");
-  await page.locator("#mode").click();
+  await switchMode(page);
   await expect(page.locator("#text")).toBeVisible();
   await expect(page.locator("#error")).toContainText("保護行");
   await page.locator("#save").click();
@@ -295,8 +334,8 @@ test("unknown canonical attributes make rich editor read-only but survive text m
   );
   await expect(page.locator("#hint")).toContainText("未対応");
   const before = (await value(page)).document;
-  await page.locator("#mode").click();
-  await page.locator("#mode").click();
+  await switchMode(page);
+  await switchMode(page);
   await page.locator("#save").click();
   await expect(page.locator("#status")).toHaveText("保存しました");
   expect((await value(page)).document).toEqual(before);
@@ -321,9 +360,21 @@ test("checklist reorder toolbar preserves existing BlockId and assigns one to a 
     )
     .toBe(true);
   await page.keyboard.press("End");
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          window
+            .getSelection()
+            ?.anchorNode?.parentElement?.closest("li[data-type=taskItem]")
+            ?.textContent,
+      ),
+    )
+    .toContain("テストタスク");
   await page.keyboard.press("Enter");
   await page.keyboard.insertText("第二タスク");
   await expect(page.locator("#rich li[data-type=taskItem]")).toHaveCount(2);
+  await page.locator("#advanced summary").click();
   await page.locator("[data-format=up]").click();
   await expect(
     page.locator("#rich li[data-type=taskItem]").first(),
@@ -333,8 +384,8 @@ test("checklist reorder toolbar preserves existing BlockId and assigns one to a 
   const items = (await value(page)).document.content[1].content;
   expect(items[1].attrs.blockId).toBe(id);
   expect(items[0].attrs.blockId).not.toBe(id);
-  await page.locator("#mode").click();
-  await page.locator("#mode").click();
+  await switchMode(page);
+  await switchMode(page);
   await expect(
     page.locator("#rich li[data-type=taskItem]").first(),
   ).toContainText("第二タスク");
@@ -444,4 +495,119 @@ test("shortcut registration failure retains saved setting and lets the user retr
   await expect(page.locator("#quick-shortcut-current")).toHaveText(
     "現在の設定: Ctrl+Alt+Q",
   );
+});
+
+test("text memo edits raw JSON, preserves language and content after reload", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await boot(page);
+  await page.locator("#new-text").click();
+  await page.locator("#title").fill("設定ファイルの下書き");
+  await page.locator("#language").selectOption("json");
+  await page.locator(".monaco-editor").click();
+  await page.keyboard.insertText('{"message":"こんにちは","enabled":true}');
+  await page.locator("#save").click();
+  await expect(page.locator("#status")).toHaveText("保存しました");
+  await page.reload();
+  await expect(page.locator("#status")).toHaveText("保存済み");
+  await page.locator("[data-page=notes]").click();
+  await expect(page.locator("#title")).toHaveValue("設定ファイルの下書き");
+  await expect(page.locator("#language")).toHaveValue("json");
+  await expect(page.locator(".view-lines")).toContainText("こんにちは");
+  await expect(page.locator("#mode")).toBeHidden();
+  expect(errors).toEqual([]);
+});
+test("copy to text memo leaves source image, checklist and formatting unchanged", async ({
+  page,
+}) => {
+  await boot(page);
+  const original = (await value(page)).document;
+  await page.locator("#advanced summary").click();
+  await page.locator("#copy-text").click();
+  await expect(page.locator(".view-lines")).toContainText("本文 0");
+  await page.locator("#save").click();
+  await expect(page.locator("#status")).toHaveText("保存しました");
+  expect((await value(page)).document).toEqual(original);
+});
+test("text color and highlight survive protected mode and restart", async ({
+  page,
+}) => {
+  await boot(page);
+  await page.locator(".tiptap>p").first().click();
+  await page.keyboard.press("Home");
+  await page.keyboard.press("Shift+End");
+  await expect
+    .poll(() => page.evaluate(() => window.getSelection()?.toString()))
+    .toBe("本文 0");
+  await page.locator("#text-color").selectOption("#e05260");
+  await expect(page.locator(".tiptap>p span[style]")).toContainText("本文 0");
+  await page.locator("#highlight-color").selectOption("#f4d06f");
+  await expect(page.locator(".tiptap mark")).toContainText("本文 0");
+  await expect(page.locator(".tiptap>p span[style]")).toContainText("本文 0");
+  for (let i = 0; i < 40; i++) await switchMode(page);
+  await page.locator("#save").click();
+  await expect(page.locator("#status")).toHaveText("保存しました");
+  const saved = (await value(page)).document;
+  expect(JSON.stringify(saved)).toContain('"color":"#e05260"');
+  expect(JSON.stringify(saved)).toContain('"color":"#f4d06f"');
+  await page.reload();
+  await expect(page.locator("#status")).toHaveText("保存済み");
+  await page.locator("[data-page=notes]").click();
+  await expect(page.locator(".tiptap")).toHaveAttribute(
+    "contenteditable",
+    "true",
+  );
+  await expect(page.locator(".tiptap mark")).toContainText("本文 0");
+  await page.locator(".tiptap>p").first().click();
+  await page.keyboard.press("Home");
+  await page.keyboard.press("Shift+End");
+  await expect
+    .poll(() => page.evaluate(() => window.getSelection()?.toString()))
+    .toBe("本文 0");
+  await page.locator("#text-color").selectOption("");
+  await page.locator("#highlight-color").selectOption("");
+  await expect(page.locator(".tiptap mark")).toHaveCount(0);
+  await expect(page.locator(".tiptap>p span[style]")).toHaveCount(0);
+});
+test("task priority, due dates and filters persist; quick memo can be hidden", async ({
+  page,
+}) => {
+  await boot(page);
+  await page.locator("[data-page=tasks]").click();
+  await page.locator(".task select").first().selectOption("3");
+  await expect(page.locator("#status")).toHaveText("タスクを保存しました");
+  await page.locator(".task input[type=date]").first().fill("2020-01-01");
+  await expect(page.locator("#status")).toHaveText("タスクを保存しました");
+  await page.getByRole("button", { name: "期限超過", exact: true }).click();
+  await expect(page.locator(".task")).toHaveCount(1);
+  await expect(page.locator(".task select")).toHaveValue("3");
+  await page.reload();
+  await expect(page.locator("#status")).toHaveText("保存済み");
+  await page.locator("[data-page=tasks]").click();
+  await expect(page.locator(".task input[type=date]").first()).toHaveValue(
+    "2020-01-01",
+  );
+  await page.locator("[data-page=settings]").click();
+  await page.getByLabel("サイドバーにクイックメモを表示").uncheck();
+  await expect(page.locator("#quick")).toBeHidden();
+  await page.reload();
+  await expect(page.locator("#status")).toHaveText("保存済み");
+  await expect(page.locator("#quick")).toBeHidden();
+});
+test("review visual evidence for light and dark workspace", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1200, height: 800 });
+  await boot(page);
+  await page.locator("[data-page=home]").click();
+  await page.screenshot({ path: "../docs/evidence/review-home-light.png" });
+  await page.locator("[data-page=notes]").click();
+  await page.screenshot({ path: "../docs/evidence/review-editor-light.png" });
+  await page.locator("[data-page=settings]").click();
+  await page.locator("#settings > select").selectOption("dark");
+  await expect(page.locator("body")).toHaveClass(/dark/);
+  await page.locator("[data-page=home]").click();
+  await page.screenshot({ path: "../docs/evidence/review-home-dark.png" });
 });

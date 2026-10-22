@@ -1,3 +1,11 @@
+import {
+  TextColor,
+  Highlight,
+  isTextMemo,
+  textMemo,
+  readableText,
+  languages,
+} from "./note-tools";
 import { shortcutSettings } from "./shortcut-settings";
 import { Editor, Extension } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
@@ -5,6 +13,7 @@ import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
 import Image from "@tiptap/extension-image";
 import * as monaco from "monaco-editor";
+import JsonWorker from "monaco-editor/language/json/json.worker.js?worker";
 import EditorWorker from "monaco-editor/editor/editor.worker.js?worker";
 import {
   applyProjection,
@@ -15,7 +24,8 @@ import {
 } from "./projection";
 import "./style.css";
 (self as unknown as { MonacoEnvironment: unknown }).MonacoEnvironment = {
-  getWorker: () => new EditorWorker(),
+  getWorker: (_: string, label: string) =>
+    label === "json" ? new JsonWorker() : new EditorWorker(),
 };
 type Note = {
   id: string;
@@ -32,10 +42,13 @@ type Task = {
   name: string;
   completed: boolean;
   dueAt: string | null;
+  priority: number;
+  revision: number;
 };
 type Prefs = {
   topmost: boolean;
   quickTopmost: boolean;
+  showQuickMemo?: boolean;
   quickShortcut?: string;
   autoStart: boolean;
   theme: string;
@@ -142,9 +155,12 @@ const rich = new Editor({
           `チェック項目: ${node.textContent || "空の項目"}`,
       },
     }),
+    TextColor,
+    Highlight,
     managedImage,
     blockAttribute,
   ],
+  onSelectionUpdate: ({ editor }) => syncColors(editor),
   content: { type: "doc", content: [{ type: "paragraph" }] },
   onUpdate: () => {
     if (suppress || !active) return;
@@ -162,6 +178,7 @@ const rich = new Editor({
       });
       suppress = false;
     }
+    syncColors(rich);
     changed(n.id);
   },
   editorProps: {
@@ -178,6 +195,14 @@ const rich = new Editor({
     handleDrop: () => true,
   },
 });
+function syncColors(editor: Editor) {
+  for (const [id, mark] of [
+    ["text-color", "textColor"],
+    ["highlight-color", "highlight"],
+  ]) {
+    $<HTMLSelectElement>(id).value = editor.getAttributes(mark).color ?? "";
+  }
+}
 monaco.languages.register({ id: "smartnote" });
 monaco.languages.setMonarchTokensProvider("smartnote", {
   tokenizer: {
@@ -218,8 +243,11 @@ function capture() {
     t = tab();
   if (!n || !t) return;
   if (t.mode === "text") {
-    if (!projectionBase) throw Error("編集用の正本がありません。");
-    n.document = applyProjection(projectionBase, text.getValue());
+    if (isTextMemo(n.document)) n.document.text = text.getValue();
+    else {
+      if (!projectionBase) throw Error("編集用の正本がありません。");
+      n.document = applyProjection(projectionBase, text.getValue());
+    }
     t.view = text.saveViewState();
   } else {
     t.scroll = $("rich").scrollTop;
@@ -260,7 +288,12 @@ async function flush(): Promise<boolean> {
 function model(n: Note) {
   let m = models.get(n.id);
   if (!m) {
-    m = monaco.editor.createModel(project(n.document), "smartnote");
+    m = monaco.editor.createModel(
+      isTextMemo(n.document) ? (n.document.text ?? "") : project(n.document),
+      isTextMemo(n.document)
+        ? String(n.document.attrs?.language ?? "plaintext")
+        : "smartnote",
+    );
     models.set(n.id, m);
   }
   return m;
@@ -292,20 +325,32 @@ function showEditor() {
   $("title").setAttribute("value", n.title);
   $<HTMLInputElement>("title").value = n.title;
   suppress = true;
+  const plain = isTextMemo(n.document);
+  if (plain) t.mode = "text";
   const isText = t.mode === "text";
+  $("mode").hidden = plain;
+  $("copy-text").hidden = plain;
+  $("language").hidden = !plain;
+  $<HTMLSelectElement>("language").value = String(
+    n.document.attrs?.language ?? "plaintext",
+  );
+  $("colors").hidden = isText;
   $("rich").hidden = isText;
   $("text").hidden = !isText;
-  $("mode").textContent = isText ? "ノートへ" : "テキストへ";
-  $("hint").textContent = isText
-    ? "本文: text: の引用符内を編集 ／ チェック: [x]・[ ] ／ 構造・画像・識別子は保護されています。"
-    : "画像は貼り付け・画像ボタンで追加できます。チェック項目は保存時にタスクへ登録されます。";
+  $("mode").textContent = isText ? "ノートへ" : "保護テキスト";
+  $("hint").textContent = plain
+    ? "テキストメモ · Ctrl+F 検索 / Ctrl+H 置換。コード・設定ファイル・Markdownの下書きに。チェックリスト連動はノートで利用できます。"
+    : isText
+      ? "本文: text: の引用符内を編集 ／ チェック: [x]・[ ] ／ 構造・画像・識別子は保護されています。"
+      : "画像は貼り付け・画像ボタンで追加できます。チェック項目は保存時にタスクへ登録されます。";
   document
     .querySelectorAll<HTMLButtonElement>("[data-format],#image")
     .forEach((b) => (b.disabled = isText));
   if (isText) {
     projectionBase = structuredClone(n.document);
     const m = model(n);
-    if (m.getValue() !== project(n.document)) m.setValue(project(n.document));
+    const value = plain ? (n.document.text ?? "") : project(n.document);
+    if (m.getValue() !== value) m.setValue(value);
     text.setModel(m);
     if (t.view) text.restoreViewState(t.view);
     text.layout();
@@ -384,20 +429,49 @@ function renderTabs() {
     el.append(wrap);
   }
 }
+let noteSearch = "";
 function renderList() {
   const el = $("note-list");
-  el.replaceChildren(button("＋ 新しいメモ", () => void create()));
-  notes.forEach((n) =>
-    el.append(
-      button(
-        (n.isQuick ? "一時: " : "") + (n.title || "無題"),
-        () => void open(n.id),
-      ),
-    ),
+  el.replaceChildren();
+  const search = document.createElement("input");
+  search.placeholder = "メモを検索…";
+  search.setAttribute("aria-label", "メモを検索");
+  search.value = noteSearch;
+  const items = document.createElement("div");
+  const populate = () => {
+    items.replaceChildren();
+    notes
+      .filter((n) =>
+        (n.title + readableText(n.document))
+          .toLowerCase()
+          .includes(noteSearch.toLowerCase()),
+      )
+      .forEach((n) => {
+        const b = button(n.title || "無題", () => void open(n.id));
+        b.setAttribute("aria-label", n.title || "無題");
+        b.className = "note-card";
+        const detail = document.createElement("small");
+        detail.textContent = `${n.isQuick ? "一時メモ" : isTextMemo(n.document) ? "テキスト" : "ノート"} · ${new Date(n.updatedAt).toLocaleDateString("ja-JP")}\n${readableText(n.document).slice(0, 60) || "まだ内容がありません"}`;
+        b.append(detail);
+        items.append(b);
+      });
+  };
+  search.oninput = () => {
+    noteSearch = search.value;
+    populate();
+  };
+  el.append(
+    button("＋ 新しいメモ", () => void create()),
+    search,
+    items,
   );
+  populate();
 }
 function showPage(next: string) {
   page = next;
+  document
+    .querySelectorAll<HTMLElement>("[data-page]")
+    .forEach((b) => b.classList.toggle("active", b.dataset.page === next));
   for (const p of ["home", "notes", "tasks", "settings"])
     $(p).hidden = p !== next;
   $("heading").textContent = (
@@ -416,34 +490,144 @@ function showPage(next: string) {
 function renderHome() {
   const el = $("home");
   el.replaceChildren();
-  const count = document.createElement("div");
-  count.className = "card";
+  const intro = document.createElement("div");
+  intro.className = "welcome";
+  const date = document.createElement("small");
+  date.textContent = new Date().toLocaleDateString("ja-JP", {
+    month: "long",
+    day: "numeric",
+    weekday: "long",
+  });
+  const title = document.createElement("h2");
+  title.textContent = "考えを残す。次の一歩へ。";
+  const subtitle = document.createElement("p");
+  subtitle.textContent = "ノートとタスクを、ひとつの場所に。";
+  intro.append(date, title, subtitle);
+  const stats = document.createElement("div");
+  stats.className = "stats";
   const today = new Date().toLocaleDateString("sv-SE");
-  count.textContent = `今日が期限のタスク ${tasks.filter((t) => !t.completed && t.dueAt?.slice(0, 10) === today).length} 件 ／ 未完了 ${tasks.filter((t) => !t.completed).length} 件（PoCは期限設定UIなし）`;
-  el.append(
-    count,
-    button("＋ メモを作成", () => void create()),
+  for (const [label, count, filter] of [
+    [
+      "今日のタスク",
+      tasks.filter((t) => !t.completed && t.dueAt === today).length,
+      "today",
+    ],
+    [
+      "期限を過ぎたタスク",
+      tasks.filter((t) => !t.completed && t.dueAt && t.dueAt < today).length,
+      "overdue",
+    ],
+    ["未完了のタスク", tasks.filter((t) => !t.completed).length, "open"],
+  ] as const) {
+    const card = button("", () => {
+      taskFilter = filter;
+      showPage("tasks");
+    });
+    card.className = "stat-card";
+    const value = document.createElement("strong");
+    value.textContent = String(count);
+    card.append(document.createTextNode(label), value);
+    stats.append(card);
+  }
+  const actions = document.createElement("div");
+  actions.className = "home-actions";
+  actions.append(
+    button("＋ ノートを作成", () => void create()),
+    button("＋ テキストメモ", () => void create(true)),
   );
   const h = document.createElement("h2");
-  h.textContent = "最近編集したメモ";
-  el.append(h);
+  h.textContent = "最近のメモ";
+  const recent = document.createElement("div");
+  recent.className = "recent-grid";
   [...notes]
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
-    .slice(0, 8)
-    .forEach((n) => el.append(button(n.title, () => void open(n.id))));
+    .slice(0, 6)
+    .forEach((n) => {
+      const card = button(n.title, () => void open(n.id));
+      card.className = "recent-card";
+      const preview = document.createElement("p");
+      preview.textContent =
+        readableText(n.document).slice(0, 100) || "まだ内容がありません";
+      const tag = document.createElement("small");
+      tag.textContent = isTextMemo(n.document)
+        ? "テキストメモ"
+        : n.isQuick
+          ? "一時メモ"
+          : "ノート";
+      card.append(preview, tag);
+      recent.append(card);
+    });
+  el.append(intro, stats, actions, h, recent);
 }
+let taskFilter = "all";
+let taskSort = "priority";
 function renderTasks() {
   const el = $("tasks");
   el.replaceChildren();
+  const filters = document.createElement("div");
+  filters.className = "task-filters";
+  for (const [key, label] of [
+    ["all", "すべて"],
+    ["open", "未完了"],
+    ["today", "今日"],
+    ["overdue", "期限超過"],
+    ["completed", "完了"],
+  ]) {
+    const b = button(label, () => {
+      taskFilter = key;
+      renderTasks();
+    });
+    b.classList.toggle("active", taskFilter === key);
+    filters.append(b);
+  }
+  const sort = document.createElement("select");
+  sort.setAttribute("aria-label", "タスクの並び順");
+  for (const [value, label] of [
+    ["priority", "優先度順"],
+    ["due", "期限順"],
+  ])
+    sort.add(new Option(label, value));
+  sort.value = taskSort;
+  sort.onchange = () => {
+    taskSort = sort.value;
+    renderTasks();
+  };
+  filters.append(sort);
+  el.append(filters);
   if (!tasks.length)
-    el.textContent =
-      "ノートにチェック項目を追加すると、保存後にここへ表示されます。";
-  for (const task of tasks) {
-    const row = document.createElement("label");
+    el.append(
+      document.createTextNode(
+        "ノートにチェック項目を追加すると、保存後にここへ表示されます。",
+      ),
+    );
+  const today = new Date().toLocaleDateString("sv-SE");
+  const visible = tasks.filter(
+    (t) =>
+      taskFilter === "all" ||
+      (taskFilter === "completed"
+        ? t.completed
+        : !t.completed &&
+          (taskFilter === "open" ||
+            (taskFilter === "today"
+              ? t.dueAt === today
+              : !!t.dueAt && t.dueAt < today))),
+  );
+  visible.sort(
+    (a, b) =>
+      Number(a.completed) - Number(b.completed) ||
+      (taskSort === "priority" ? (b.priority ?? 0) - (a.priority ?? 0) : 0) ||
+      (a.dueAt || "9999").localeCompare(b.dueAt || "9999") ||
+      a.name.localeCompare(b.name),
+  );
+  if (tasks.length && !visible.length)
+    el.append(document.createTextNode("該当するタスクはありません。"));
+  for (const task of visible) {
+    const row = document.createElement("div");
     row.className = "task";
     const check = document.createElement("input");
     check.type = "checkbox";
     check.checked = task.completed;
+    check.setAttribute("aria-label", task.name || "空のタスク");
     check.onchange = async () => {
       check.disabled = true;
       document.querySelector("main")!.inert = true;
@@ -471,9 +655,47 @@ function renderTasks() {
     };
     const label = document.createElement("span");
     label.textContent = task.name || "（空の項目）";
+    label.className = "task-name";
+    if (task.completed) label.classList.add("completed");
+    const priority = document.createElement("select");
+    priority.setAttribute("aria-label", `${task.name}の優先度`);
+    ["指定なし", "低", "中", "高"].forEach((name, i) =>
+      priority.add(new Option(name, String(i))),
+    );
+    priority.value = String(task.priority ?? 0);
+    const due = document.createElement("input");
+    due.type = "date";
+    due.value = task.dueAt?.slice(0, 10) ?? "";
+    due.setAttribute("aria-label", `${task.name}の期限`);
+    const update = async () => {
+      const priorityValue = Number(priority.value),
+        dueValue = due.value || null;
+      document.querySelector("main")!.inert = true;
+      try {
+        if (!(await flush())) return;
+        const latest = tasks.find((t) => t.id === task.id);
+        if (!latest) throw Error("タスクが削除されています。");
+        await request("updateTask", {
+          id: task.id,
+          revision: latest.revision,
+          priority: priorityValue,
+          dueAt: dueValue,
+        });
+        tasks = await request<Task[]>("tasks");
+        status("タスクを保存しました");
+      } catch (e) {
+        error(e);
+      } finally {
+        document.querySelector("main")!.inert = false;
+        renderTasks();
+      }
+    };
+    priority.onchange = due.onchange = update;
     row.append(
       check,
       label,
+      priority,
+      due,
       button("メモへ", () => void open(task.noteId)),
     );
     el.append(row);
@@ -483,6 +705,9 @@ function theme() {
   const dark =
     prefs.theme === "dark" || (prefs.theme === "system" && systemDark);
   document.body.classList.toggle("dark", dark);
+  $("quick").hidden = prefs.showQuickMemo === false;
+  $("quick").title =
+    `思いつき・電話中のメモを一時保存 · ${prefs.quickShortcut || "ショートカット無効"}`;
   monaco.editor.setTheme(dark ? "vs-dark" : "vs");
 }
 function renderSettings() {
@@ -501,19 +726,21 @@ function renderSettings() {
     ["topmost", "メイン画面を最前面に表示"],
     ["quickTopmost", "クイックメモを最前面に表示"],
     ["autoStart", "Windowsサインイン時に常駐起動"],
+    ["showQuickMemo", "サイドバーにクイックメモを表示"],
   ] as const) {
     const row = document.createElement("label");
     const check = document.createElement("input");
     check.type = "checkbox";
-    check.checked = prefs[key];
+    check.checked = prefs[key] ?? true;
     check.onchange = async () => {
       try {
         prefs = await request<Prefs>("preferences", {
           ...prefs,
           [key]: check.checked,
         });
+        theme();
       } catch (e) {
-        check.checked = prefs[key];
+        check.checked = prefs[key] ?? true;
         error(e);
       }
     };
@@ -549,7 +776,43 @@ function renderSettings() {
     "AI・同期は後続フェーズです。ローカル保存のみ実装しています。";
   el.append(p);
 }
-async function create() {
+$("new-text").onclick = () => void create(true);
+$("copy-text").onclick = async () => {
+  try {
+    capture();
+    const original = current();
+    if (original)
+      await create(
+        true,
+        readableText(original.document),
+        original.title + "（テキスト）",
+      );
+  } catch (e) {
+    error(e);
+  }
+};
+$("language").onchange = () => {
+  const n = current();
+  if (!n || !isTextMemo(n.document)) return;
+  const language = $<HTMLSelectElement>("language").value;
+  if (!languages.includes(language)) return;
+  n.document.attrs = { language };
+  monaco.editor.setModelLanguage(model(n), language);
+  changed(n.id);
+};
+for (const [id, mark] of [
+  ["text-color", "textColor"],
+  ["highlight-color", "highlight"],
+]) {
+  $(id).onchange = () => {
+    if (!rich.isEditable || tab()?.mode !== "note") return;
+    const value = $<HTMLSelectElement>(id).value;
+    const c = rich.chain();
+    if (value) c.setMark(mark, { color: value }).run();
+    else c.unsetMark(mark).run();
+  };
+}
+async function create(plain = false, initial = "", title?: string) {
   try {
     capture();
   } catch (e) {
@@ -559,8 +822,13 @@ async function create() {
   const now = new Date().toISOString();
   const n: Note = {
     id: crypto.randomUUID(),
-    title: "新しいメモ",
-    document: { type: "doc", content: [{ type: "paragraph" }] },
+    title: (title ?? (plain ? "新しいテキストメモ" : "新しいメモ")).slice(
+      0,
+      500,
+    ),
+    document: plain
+      ? textMemo(initial)
+      : { type: "doc", content: [{ type: "paragraph" }] },
     revision: 0,
     createdAt: now,
     updatedAt: now,

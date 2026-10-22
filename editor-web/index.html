@@ -12,7 +12,8 @@
   <body>
     <div id="app">
       <nav>
-        <b>SmartNote AI</b><small>技術検証版 v0.1.1</small
+        <img class="brand-icon" src="/icon.svg" alt="" /><b>SmartNote AI</b
+        ><small>YOUR PERSONAL WORKSPACE</small
         ><button data-page="home">ホーム</button
         ><button data-page="notes">メモ</button
         ><button data-page="tasks">タスク</button
@@ -33,17 +34,14 @@
             <div id="tabs"></div>
             <input id="title" aria-label="メモタイトル" maxlength="500" />
             <div id="toolbar">
-              <button id="new">＋ 新規</button
-              ><button id="mode">テキストへ</button
+              <button id="new">＋ ノート</button
+              ><button id="new-text">＋ テキスト</button
               ><button id="save">保存 Ctrl+S</button
               ><button data-format="bold">太字</button
               ><button data-format="italic">斜体</button
               ><button data-format="heading">見出し</button
               ><button data-format="bullet">箇条書き</button
               ><button data-format="task">チェック</button
-              ><button data-format="up">項目 ↑</button
-              ><button data-format="down">項目 ↓</button
-              ><button data-format="code">コード</button
               ><button id="image">画像</button
               ><input
                 id="file"
@@ -52,6 +50,56 @@
                 hidden
               />
             </div>
+            <div class="editor-options">
+              <div id="colors">
+                <select id="text-color" aria-label="文字色">
+                  <option value="">文字色 · 標準</option>
+                  <option value="#e05260">赤</option>
+                  <option value="#3489d5">青</option>
+                  <option value="#279b77">緑</option>
+                  <option value="#a576d5">紫</option>
+                </select>
+                <select id="highlight-color" aria-label="ハイライト">
+                  <option value="">ハイライト · なし</option>
+                  <option value="#f4d06f">黄</option>
+                  <option value="#91d9bd">緑</option>
+                  <option value="#b6c9f0">青</option>
+                </select>
+              </div>
+              <select id="language" aria-label="テキストの言語" hidden>
+                <option value="plaintext">Plain text</option>
+                <option value="markdown">Markdown</option>
+                <option value="powershell">PowerShell</option>
+                <option value="json">JSON</option>
+                <option value="xml">XML</option>
+              </select>
+            </div>
+            <details id="advanced">
+              <summary>その他の編集</summary>
+              <div class="advanced-actions">
+                <button
+                  id="mode"
+                  title="元の構造を保護して本文・チェック状態を編集"
+                >
+                  保護テキスト</button
+                ><button data-format="up">項目 ↑</button
+                ><button data-format="down">項目 ↓</button
+                ><button
+                  data-format="code"
+                  title="コマンドやプログラムを等幅・改行付きで記録します。実行はされません。"
+                >
+                  コード</button
+                ><button
+                  id="copy-text"
+                  title="本文を別のテキストメモへコピー。装飾・画像・タスク連動は元のノートに残ります。"
+                >
+                  テキストへコピー
+                </button>
+              </div>
+              <p>
+                コードはコマンドやプログラムを読みやすく記録する書式です（実行はしません）。保護テキストは元のノートの構造を維持して編集する詳細モードです。テキストへコピーすると別メモを作成し、装飾・画像・タスク連動は元のノートに残ります。
+              </p>
+            </details>
             <p id="hint"></p>
             <div id="rich"></div>
             <div id="text" hidden></div>

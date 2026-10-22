@@ -60,6 +60,9 @@ public partial class MainWindow : Window
                 return null;
             case "tasks":
                 return await app.Repository.TasksAsync();
+            case "updateTask":
+                await app.Repository.UpdateTaskAsync(data.GetProperty("id").GetString() ?? "", data.GetProperty("revision").GetInt64(), data.GetProperty("priority").GetInt32(), data.GetProperty("dueAt").ValueKind == JsonValueKind.Null ? null : data.GetProperty("dueAt").GetString());
+                return null;
             case "toggleTask":
                 return await app.Notes.ToggleTaskAsync(data.GetProperty("id").GetString() ?? "", data.GetProperty("completed").GetBoolean());
             case "session":

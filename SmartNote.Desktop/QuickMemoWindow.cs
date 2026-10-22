@@ -8,8 +8,8 @@ namespace SmartNote.Desktop;
 public sealed class QuickMemoWindow : Window
 {
     private readonly App app;
-    private readonly TextBox input = new() { AcceptsReturn = true, TextWrapping = TextWrapping.Wrap, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, FontSize = 16, Margin = new Thickness(12) };
-    private readonly TextBlock status = new() { Margin = new Thickness(12, 4, 12, 8), Text = "一時メモ / 自動保存" };
+    private readonly TextBox input = new() { AcceptsReturn = true, TextWrapping = TextWrapping.Wrap, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, Padding = new Thickness(14), BorderThickness = new Thickness(0), FontSize = 16, Margin = new Thickness(12) };
+    private readonly TextBlock status = new() { Margin = new Thickness(12, 4, 12, 8), Text = "思いつき・電話のメモを一時保存 / 自動保存" };
     private readonly DispatcherTimer timer = new() { Interval = TimeSpan.FromSeconds(1) };
     private readonly SemaphoreSlim gate = new(1, 1);
     private Note? note;
@@ -19,6 +19,7 @@ public sealed class QuickMemoWindow : Window
     {
         this.app = app;
         Title = "クイックメモ — SmartNote AI";
+        Icon = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/Assets/SmartNote.ico"));
         Width = 430;
         Height = 330;
         Topmost = app.Preferences.QuickTopmost;

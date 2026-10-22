@@ -1,0 +1,29 @@
+
+> smartnote-editor@0.2.0 test:e2e
+> playwright test
+
+[WebServer] (node:21675) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:21688) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 14 tests using 1 worker
+
+(node:21707) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 e2e/editor.spec.ts:206:1 › Tiptap editing, checklist task sync, image and ten tabs survive navigation/reload (2.9s)
+  ✓   2 e2e/editor.spec.ts:261:1 › 40 real mode transitions preserve image, marks, checked and blockId (4.1s)
+  ✓   3 e2e/editor.spec.ts:271:1 › Monaco accepts text edits, rejects structural edits and retains invalid buffer (1.9s)
+  ✓   4 e2e/editor.spec.ts:304:1 › save failure retains draft and refuses tab close; retry saves (1.2s)
+  ✓   5 e2e/editor.spec.ts:327:1 › unknown canonical attributes make rich editor read-only but survive text mode (1.4s)
+  ✓   6 e2e/editor.spec.ts:344:1 › checklist reorder toolbar preserves existing BlockId and assigns one to a new item (1.6s)
+  ✓   7 e2e/editor.spec.ts:394:1 › external quick-memo update refreshes the active clean editor before further edits (1.2s)
+  ✓   8 e2e/editor.spec.ts:412:1 › quick shortcut can be changed, restored on reload, disabled and reset (1.9s)
+  ✓   9 e2e/editor.spec.ts:457:1 › shortcut registration failure retains saved setting and lets the user retry (1.5s)
+  ✓  10 e2e/editor.spec.ts:500:1 › text memo edits raw JSON, preserves language and content after reload (2.0s)
+  ✓  11 e2e/editor.spec.ts:522:1 › copy to text memo leaves source image, checklist and formatting unchanged (1.4s)
+  ✓  12 e2e/editor.spec.ts:534:1 › text color and highlight survive protected mode and restart (4.8s)
+  ✓  13 e2e/editor.spec.ts:574:1 › task priority, due dates and filters persist; quick memo can be hidden (2.2s)
+  ✓  14 e2e/editor.spec.ts:599:1 › review visual evidence for light and dark workspace (1.5s)
+
+  14 passed (31.7s)

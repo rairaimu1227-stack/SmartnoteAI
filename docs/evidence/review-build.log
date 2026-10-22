@@ -1,0 +1,12 @@
+  SmartNote.Core -> /workspace/SmartnoteAI/SmartNote.Core/bin/Release/net10.0/SmartNote.Core.dll
+  SmartNote.Editor -> /workspace/SmartnoteAI/SmartNote.Editor/bin/Release/net10.0-windows/SmartNote.Editor.dll
+  SmartNote.Application -> /workspace/SmartnoteAI/SmartNote.Application/bin/Release/net10.0/SmartNote.Application.dll
+  SmartNote.Infrastructure -> /workspace/SmartnoteAI/SmartNote.Infrastructure/bin/Release/net10.0/SmartNote.Infrastructure.dll
+  SmartNote.Tests -> /workspace/SmartnoteAI/SmartNote.Tests/bin/Release/net10.0/SmartNote.Tests.dll
+  SmartNote.Desktop -> /workspace/SmartnoteAI/SmartNote.Desktop/bin/Release/net10.0-windows/win-x64/SmartNote.Desktop.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:04.32

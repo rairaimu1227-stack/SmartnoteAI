@@ -208,3 +208,383 @@ pre {
 small {
   opacity: 0.75;
 }
+:root {
+  --surface: #fff;
+  --border: #e3e8e8;
+  --accent: #157e71;
+  --muted: #71817e;
+  --soft: #edf6f3;
+  background: #f5f7f6;
+  color: #243632;
+  font-size: 14px;
+}
+body.dark {
+  --surface: #202a2c;
+  --border: #354244;
+  --accent: #72d8bd;
+  --muted: #a0b0ad;
+  --soft: #273e39;
+  background: #172022;
+  color: #e3ece9;
+}
+[hidden] {
+  display: none !important;
+}
+button {
+  border-radius: 8px;
+  transition: background 0.15s;
+  padding: 8px 12px;
+}
+button:hover {
+  background: var(--soft);
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+input,
+select {
+  border-radius: 7px;
+}
+nav {
+  width: 188px;
+  padding: 26px 16px;
+  gap: 8px;
+}
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 8px;
+}
+nav b {
+  font-size: 19px;
+  letter-spacing: -0.6px;
+}
+nav small {
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 30px;
+}
+nav button {
+  text-align: left;
+  border-color: transparent;
+  padding: 12px 14px;
+  background: transparent;
+}
+nav button.active {
+  background: var(--soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+#quick {
+  margin-top: auto;
+  border: 1px solid var(--border);
+  font-size: 12px;
+}
+main {
+  padding: 0 28px;
+}
+header {
+  min-height: 74px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+h1 {
+  font-size: 18px;
+  font-weight: 600;
+}
+#status {
+  color: var(--muted);
+}
+#status::before {
+  content: "●";
+  color: var(--accent);
+  margin-right: 7px;
+  font-size: 9px;
+}
+h2 {
+  font-size: 17px;
+  font-weight: 600;
+}
+#home {
+  padding: 10px 4px 28px;
+}
+.welcome {
+  padding: 10px 0 24px;
+}
+.welcome small {
+  color: var(--accent);
+  font-weight: 600;
+}
+.welcome h2 {
+  font-size: 30px;
+  letter-spacing: -1px;
+  margin: 14px 0 8px;
+}
+.welcome p {
+  color: var(--muted);
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+#home .stat-card {
+  margin: 0;
+  padding: 22px;
+  text-align: left;
+  border-radius: 12px;
+  font-size: 12px;
+}
+.stat-card strong {
+  display: block;
+  font-size: 34px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-top: 12px;
+}
+.home-actions {
+  margin: 24px 0 36px;
+}
+.home-actions button:first-child {
+  background: var(--accent);
+  color: var(--surface);
+  border-color: var(--accent);
+}
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+#home .recent-card {
+  margin: 0;
+  padding: 20px;
+  text-align: left;
+  font-weight: 600;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.recent-card p {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
+  height: 44px;
+  overflow: hidden;
+}
+.recent-card small {
+  font-weight: 400;
+  color: var(--accent);
+}
+#notes {
+  gap: 20px;
+}
+#note-list {
+  width: 220px;
+  padding-right: 14px;
+  border-right: 1px solid var(--border);
+}
+#note-list input {
+  width: 100%;
+  font-size: 12px;
+  margin: 12px 0;
+}
+#note-list .note-card {
+  padding: 14px 12px;
+  margin: 5px 0;
+  border-color: transparent;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+}
+.note-card small {
+  display: block;
+  white-space: pre-line;
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--muted);
+  font-weight: 400;
+  max-height: 40px;
+  overflow: hidden;
+  margin-top: 7px;
+}
+#tabs {
+  gap: 6px;
+  min-height: 38px;
+}
+#tabs span {
+  display: flex;
+  flex-shrink: 0;
+}
+#tabs button {
+  border-color: transparent;
+  background: transparent;
+  font-size: 12px;
+  padding: 8px;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#tabs button.active {
+  background: var(--soft);
+  border-bottom: 2px solid var(--accent);
+}
+#title {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font-size: 25px;
+  padding: 16px 4px;
+  margin: 0;
+  font-weight: 600;
+}
+#toolbar {
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  gap: 3px;
+}
+#toolbar button {
+  font-size: 11px;
+  padding: 6px 8px;
+  background: transparent;
+  border-color: transparent;
+}
+#toolbar button:hover {
+  background: var(--soft);
+}
+.editor-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 10px;
+  align-items: center;
+}
+.editor-options select,
+.editor-options button {
+  font-size: 11px;
+  padding: 5px 8px;
+}
+#colors {
+  display: flex;
+  gap: 8px;
+}
+#hint {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 11px;
+}
+#rich,
+#text {
+  border-radius: 10px;
+}
+#rich .tiptap {
+  padding: 28px 36px;
+  line-height: 1.9;
+}
+.task-filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.task-filters button {
+  border-color: transparent;
+  background: transparent;
+  font-size: 12px;
+}
+.task-filters .active {
+  background: var(--soft);
+}
+.task-filters select {
+  margin-left: auto;
+  font-size: 12px;
+}
+.task {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin: 8px 0;
+  padding: 16px;
+  flex-wrap: wrap;
+}
+.task-name {
+  flex: 1;
+  min-width: 100px;
+}
+.task-name.completed {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+.task input[type="date"],
+.task select,
+.task button {
+  font-size: 12px;
+}
+input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+}
+#settings {
+  max-width: 800px;
+  padding: 8px 0 24px;
+}
+#settings > label {
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin: 10px 0;
+}
+#settings input[type="checkbox"] {
+  margin-right: 12px;
+  vertical-align: middle;
+}
+#error:empty {
+  display: none;
+}
+@media (max-width: 1000px) {
+  nav {
+    width: 150px;
+    padding: 20px 10px;
+  }
+  main {
+    padding: 0 16px;
+  }
+  #note-list {
+    width: 175px;
+  }
+  .welcome h2 {
+    font-size: 26px;
+  }
+  #rich .tiptap {
+    padding: 20px;
+  }
+}
+#advanced {
+  padding-top: 10px;
+  font-size: 11px;
+  color: var(--muted);
+}
+#advanced summary {
+  cursor: pointer;
+  width: max-content;
+}
+#advanced .advanced-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+#advanced button {
+  font-size: 11px;
+}
+#advanced p {
+  line-height: 1.7;
+  max-width: 760px;
+}

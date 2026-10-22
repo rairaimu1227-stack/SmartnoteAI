@@ -76,3 +76,11 @@ DBはWALとforeign_keysを有効化。起動時quick_check、起動・正常終�
 - RegisterHotKeyで設定したキー（初期Ctrl+Alt+M）を登録。QuickShortcutがキーを検証し、ShortcutControllerが新キーの仮登録→設定保存→旧キー解除を管理する。競合/保存失敗では旧キーを維持。無効化も保存成功後に解除する。登録解除とトレイ破棄はOnExit。
 - サインイン起動はHKCU Run。初期OFF、登録時は実行exeの絶対パスを引用符で囲む。
 - クイックメモは独立WPFウィンドウと独立Topmost設定。通常NoteモデルにIsQuickフラグを付けて保存する。
+
+## v0.2.0: レビュー対応のデータ設計
+
+- `Note.Document` はノートの `doc` と独立テキストメモの `textDocument` を区別する。後者は `text` と `attrs.language` を正本とし、同じSQLite保存・revision・historyを利用する。既存IDの種別変更を拒否し、コピーは新規IDを発行する。
+- `NoteTask.Priority` は0=指定なし、1=低、2=中、3=高。既存due列を日付として編集。`UpdateTaskAsync` は入力と期待revisionを検証し、トランザクションでメタデータのみ更新する。ノート保存・完了同期のupsertは優先度/期限を保持する。
+- DB v1→v2ではSQLiteオンラインバックアップを先に作り、priority列追加とuser_version更新を同一トランザクションで行う。新規DBの既存テーブル作成は冪等。旧アプリのバージョン検査でv2を拒否する。
+- Tiptapの色・ハイライトは独自MarkとしてJSONに保存する。保護テキストはそれらの属性を変更しない。JSONモードには同梱JSON workerを割り当てる。
+- `Preferences.ShowQuickMemo` はサイドバー表示だけを制御する。ショートカット登録とトレイからの起動は独立して維持する。

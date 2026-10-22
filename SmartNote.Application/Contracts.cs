@@ -9,6 +9,7 @@ public interface INoteRepository
     Task<IReadOnlyList<NoteTask>> TasksAsync();
     Task<Note> SaveAsync(Note note, IReadOnlyList<Checklist> checklist);
     Task<Note> ToggleTaskAsync(string taskId, bool completed);
+    Task UpdateTaskAsync(string id, long revision, int priority, string? dueAt);
     Task<string?> ReadStateAsync(string key);
     Task WriteStateAsync(string key, string json);
 }

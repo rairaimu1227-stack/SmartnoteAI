@@ -241,7 +241,7 @@ public sealed class PersistenceTests : IDisposable
         {
             db.Open();
             using var cmd = db.CreateCommand();
-            cmd.CommandText = "PRAGMA user_version=2";
+            cmd.CommandText = "PRAGMA user_version=3";
             cmd.ExecuteNonQuery();
         }
         await Assert.ThrowsAsync<InvalidDataException>(() => new SqliteRepository(Db).InitializeAsync());
@@ -249,7 +249,7 @@ public sealed class PersistenceTests : IDisposable
         verify.Open();
         using var query = verify.CreateCommand();
         query.CommandText = "PRAGMA user_version";
-        Assert.Equal(2L, query.ExecuteScalar());
+        Assert.Equal(3L, query.ExecuteScalar());
     }
     [Fact]
     public async Task CorruptDatabaseIsNotReplaced()
@@ -267,5 +267,71 @@ public sealed class PersistenceTests : IDisposable
         var (reopened, _) = await Open();
         var restored = System.Text.Json.JsonSerializer.Deserialize<Preferences>((await reopened.ReadStateAsync("preferences"))!);
         Assert.Equal("Ctrl+Shift+Q", restored!.QuickShortcut);
+    }
+
+    [Fact]
+    public async Task TaskMetadataSurvivesNoteSaveToggleAndReopen()
+    {
+        var (repo, service) = await Open();
+        var note = await service.SaveAsync(Fixture());
+        var task = Assert.Single(await repo.TasksAsync());
+        await repo.UpdateTaskAsync(task.Id, task.Revision, 3, "2026-11-01");
+        await Assert.ThrowsAsync<RevisionConflictException>(() => repo.UpdateTaskAsync(task.Id, task.Revision, 1, null));
+        note = await service.SaveAsync(note);
+        await repo.ToggleTaskAsync(task.Id, true);
+        var (reopened, _) = await Open();
+        task = Assert.Single(await reopened.TasksAsync());
+        Assert.True(task.Completed);
+        Assert.Equal(3, task.Priority);
+        Assert.Equal("2026-11-01", task.DueAt);
+        await repo.UpdateTaskAsync(task.Id, task.Revision, 0, null);
+        Assert.Null(Assert.Single(await repo.TasksAsync()).DueAt);
+    }
+    [Theory]
+    [InlineData(-1, null)]
+    [InlineData(4, null)]
+    [InlineData(1, "2026-02-30")]
+    [InlineData(1, "arbitrary")]
+    public async Task InvalidTaskMetadataDoesNotChangeData(int priority, string? due)
+    {
+        var (repo, service) = await Open();
+        await service.SaveAsync(Fixture());
+        var task = Assert.Single(await repo.TasksAsync());
+        await Assert.ThrowsAsync<InvalidDataException>(() => repo.UpdateTaskAsync(task.Id, task.Revision, priority, due));
+        Assert.Equal(task, Assert.Single(await repo.TasksAsync()));
+    }
+    [Fact]
+    public async Task TextMemoRoundTripsRawTextAndRejectsChangingNoteKind()
+    {
+        var (repo, service) = await Open();
+        var document = new JsonObject { ["type"] = "textDocument", ["text"] = "日本語\r\n{ \"enabled\": true }", ["attrs"] = new JsonObject { ["language"] = "json" } };
+        var note = await service.SaveAsync(Fixture() with { Document = document });
+        var (reopened, _) = await Open();
+        Assert.Equal(document.ToJsonString(), Assert.Single(await reopened.NotesAsync()).Document.ToJsonString());
+        Assert.Empty(await reopened.TasksAsync());
+        await Assert.ThrowsAsync<InvalidDataException>(() => service.SaveAsync(note with { Document = Documents.Empty() }));
+        Assert.Equal(document.ToJsonString(), Assert.Single(await repo.NotesAsync()).Document.ToJsonString());
+    }
+    [Fact]
+    public async Task VersionOneMigrationPreservesDataAndCreatesRecoveryBackup()
+    {
+        var (repo, service) = await Open();
+        var note = await service.SaveAsync(Fixture());
+        using (var db = new SqliteConnection($"Data Source={Db}"))
+        {
+            db.Open();
+            using var cmd = db.CreateCommand();
+            cmd.CommandText = "ALTER TABLE tasks DROP COLUMN priority; PRAGMA user_version=1";
+            cmd.ExecuteNonQuery();
+        }
+        var (upgraded, _) = await Open();
+        Assert.Equal(note.Document.ToJsonString(), Assert.Single(await upgraded.NotesAsync()).Document.ToJsonString());
+        Assert.Equal(0, Assert.Single(await upgraded.TasksAsync()).Priority);
+        var backup = Assert.Single(Directory.GetFiles(directory, "*.before-v2-*.bak"));
+        using var snapshot = new SqliteConnection(new SqliteConnectionStringBuilder { DataSource = backup }.ToString());
+        snapshot.Open();
+        using var version = snapshot.CreateCommand();
+        version.CommandText = "PRAGMA user_version";
+        Assert.Equal(1L, version.ExecuteScalar());
     }
 }

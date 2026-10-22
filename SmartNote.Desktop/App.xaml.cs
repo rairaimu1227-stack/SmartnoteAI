@@ -54,7 +54,7 @@ public partial class App : System.Windows.Application, INotificationService
             menu.Items.Add("メイン画面を表示", null, (_, _) => Shell.ShowMain());
             menu.Items.Add("クイックメモ", null, (_, _) => ShowQuick());
             menu.Items.Add("完全終了", null, async (_, _) => await ExitAsync());
-            tray = new Forms.NotifyIcon { Icon = System.Drawing.SystemIcons.Application, Text = "SmartNote AI", Visible = true, ContextMenuStrip = menu };
+            tray = new Forms.NotifyIcon { Icon = new System.Drawing.Icon(Path.Combine(AppContext.BaseDirectory, "Assets", "SmartNote.ico")), Text = "SmartNote AI", Visible = true, ContextMenuStrip = menu };
             tray.DoubleClick += (_, _) => Shell.ShowMain();
             hotkey = new(Shell, ShowQuick);
             try
@@ -154,6 +154,7 @@ public partial class App : System.Windows.Application, INotificationService
     {
         SystemEvents.UserPreferenceChanged -= OnSystemPreferencesChanged;
         hotkey?.Dispose();
+        tray?.Icon?.Dispose();
         tray?.Dispose();
         instance.Dispose();
         base.OnExit(e);

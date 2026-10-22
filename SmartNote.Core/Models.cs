@@ -2,9 +2,9 @@ using System.Text.Json.Nodes;
 namespace SmartNote.Core;
 
 public sealed record Note(string Id, string Title, JsonObject Document, long Revision, string CreatedAt, string UpdatedAt, bool IsQuick = false);
-public sealed record NoteTask(string Id, string NoteId, string BlockId, string Name, bool Completed, string CreatedAt, string UpdatedAt, long Revision, string? DueAt = null, string? Recurrence = null);
+public sealed record NoteTask(string Id, string NoteId, string BlockId, string Name, bool Completed, string CreatedAt, string UpdatedAt, long Revision, string? DueAt = null, string? Recurrence = null, int Priority = 0);
 public sealed record Checklist(string BlockId, string Name, bool Completed);
-public sealed record Preferences(bool Topmost = false, bool QuickTopmost = true, bool AutoStart = false, string Theme = "system", string QuickShortcut = "Ctrl+Alt+M");
+public sealed record Preferences(bool Topmost = false, bool QuickTopmost = true, bool AutoStart = false, string Theme = "system", string QuickShortcut = "Ctrl+Alt+M", bool ShowQuickMemo = true);
 public sealed class RevisionConflictException() : Exception("保存先が更新されています。未保存内容を保持しています。再読み込み前に内容を退避してください。");
 public static class Documents
 {
@@ -20,6 +20,13 @@ public static class Documents
     public static string Text(JsonObject root) => string.Concat(Nodes(root).Where(n => n["type"]?.GetValue<string>() == "text").Select(n => n["text"]?.GetValue<string>() ?? ""));
     public static void Validate(JsonObject document)
     {
+        if (document["type"]?.GetValue<string>() == "textDocument")
+        {
+            if (document["text"] is not JsonValue text || !text.TryGetValue<string>(out _) || document.ToJsonString().Length > 4_000_000 ||
+                document["attrs"]?["language"]?.GetValue<string>() is not ("plaintext" or "markdown" or "powershell" or "json" or "xml") || document.ContainsKey("content"))
+                throw new InvalidDataException("テキストメモ形式が不正です。");
+            return;
+        }
         if (document["type"]?.GetValue<string>() != "doc" || document.ToJsonString().Length > 4_000_000)
             throw new InvalidDataException("ノート形式またはサイズが不正です。");
         var ids = new HashSet<string>();

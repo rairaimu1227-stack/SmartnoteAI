@@ -1,0 +1,16 @@
+
+> smartnote-editor@0.2.0 test:e2e
+> playwright test --grep visual evidence
+
+[WebServer] (node:22401) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:22414) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:22433) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/editor.spec.ts:599:1 › review visual evidence for light and dark workspace (1.6s)
+
+  1 passed (3.3s)
