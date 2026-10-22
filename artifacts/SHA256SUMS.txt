@@ -1,0 +1,1 @@
+e87a9cd8cbbe2e479de38f0e339e2d98cf62e8ee66943a2160d0bb8d85ec6249  SmartNoteAI-PoC-v0.2.0-win-x64.zip
